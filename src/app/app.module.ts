@@ -13,6 +13,9 @@ import { ContactoComponent } from './componentes/contacto/contacto.component';
 import { CarrouselCards2Component } from './componentes/componentes-especificos/carrousel-cards2/carrousel-cards2.component';
 import { CarrouselCardsPromosComponent } from './componentes/componentes-especificos/carrousel-cards-promos/carrousel-cards-promos.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginComponent } from './componentes/login/login.component';
+import { CrearcuentaComponent } from './componentes/crearcuenta/crearcuenta.component';
+import { VigilanteGuard } from 'src/app/guard/vigilante.guard';
 
 
 
@@ -20,6 +23,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contacto', component: ContactoComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'crearcuenta', component: CrearcuentaComponent },
+  { path: '**', pathMatch: 'full', redirectTo: 'login' },
+  
 ];
 
 @NgModule({
@@ -33,6 +40,9 @@ const appRoutes: Routes = [
     ContactoComponent,
     CarrouselCards2Component,
     CarrouselCardsPromosComponent,
+    LoginComponent,
+    CrearcuentaComponent,
+
   ],
   imports: [
     BrowserModule,
