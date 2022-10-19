@@ -20,6 +20,9 @@ import { VigilanteGuard } from 'src/app/guard/vigilante.guard';
 import { PerfilComponent } from './componentes/componentes-especificos/perfil/perfil.compoent';
 import { ContactoComponent } from './componentes/componentes-especificos/contacto/contacto.component';
 import { ProductoComponent } from './componentes/componentes-especificos/producto/producto.component';
+import { ProductoDescripcionComponent } from './componentes/producto-descripcion/producto-descripcion.component';
+import { CarritoComponent } from './componentes/carrito/carrito.component';
+
 
 
 
@@ -31,6 +34,8 @@ const appRoutes: Routes = [
   { path: 'crearcuenta', component: CrearcuentaComponent },
   // producto tiene que ser un modelo no una pagina, no tengo idea de como redireccionarla para que se cargen los datos dle producto seleccionado
   { path: 'producto', component: ProductoComponent }, 
+  { path: 'productoDescripcion', component: ProductoDescripcionComponent }, 
+  { path: 'carrito', component: CarritoComponent }, 
   { path: 'perfil', component: PerfilComponent },  
   // tenes que explicarme esta linea
   { path: '**', pathMatch: 'full', redirectTo: 'login' },
@@ -52,6 +57,8 @@ const appRoutes: Routes = [
     CarrouselCardsPromosComponent,
     LoginComponent,
     CrearcuentaComponent,
+    ProductoDescripcionComponent,
+    CarritoComponent
 
   ],
   imports: [
