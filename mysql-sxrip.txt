@@ -1,0 +1,29 @@
+drop database taller2;
+
+create database taller2;
+use taller2;
+
+CREATE TABLE tipo (id int AUTO_INCREMENT PRIMARY KEY,  tipo varchar(60));
+insert into tipo (tipo)values ("Botines"),("Running"),("Traning"),("Outdoor"),("Padel"),("Diarias"),("Ojotas");
+CREATE TABLE marca (id int AUTO_INCREMENT PRIMARY KEY,  marca varchar(60));
+insert into marca (marca) values ("Adidas"),(" Nike"),("new Balance"),("Jhon foos"),("Fila"),("Puma"),("Reebok"),("Topper");
+
+CREATE TABLE productos (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre varchar(60),
+    precio varchar(60),
+    cantidad BIGINT,
+    color varchar(60),
+    ano int,
+    linkcompra varchar(250),
+    imagen1 varchar(250),
+    imagen2 varchar(250),
+    imagen3 varchar(250),
+    tipo int,
+    marca int,
+    foreign key(tipo) references tipo(id),
+	foreign key(marca) references marca(id)
+);
+
+create table cantidadPorTalle(idproducto BIGINT, talle BIGINT, cantidad bigint, foreign key(idproducto) references productos(id), primary key(idproducto,talle)); 
+

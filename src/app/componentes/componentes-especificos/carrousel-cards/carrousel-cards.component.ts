@@ -7,11 +7,11 @@ import { ProductoComponent } from '../producto/producto.component';
   styleUrls: ['./carrousel-cards.component.css']
 })
 export class CarrouselCardsComponent implements OnInit {
-  
+  //esto se tiene que cargar desd ela base
   productos=
   [{  
-    imagen1:"./assets/zapatilla1.webp",
-    linkcompra:"productoDescripcion",
+  imagen1:"./assets/zapatilla1.webp",
+  linkcompra:"productoDescripcion",
   nombre:'ZAPATILLAS ADIDAS ORIGINALS NITEBALL 2.0',
   precio:'35.999',
   cantidad: '',
