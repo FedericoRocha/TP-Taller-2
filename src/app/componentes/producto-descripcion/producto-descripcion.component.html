@@ -10,13 +10,14 @@
             <p class="fs-3">Envio Gratis</p>
             <p class="fs-3">{{zapatillaDescripcion.precio}} </p>
             <p class="fs-3"><select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                <option selected>Talle</option>
+             
+              <!-- Talles es un array de talle, el talle es individual. sql tendria que buscar una lista de talles que tenga la cantidad  mayor a  0-->  
+              <option selected>Talle</option>
                 <ng-container *ngFor="let talle of talles">
                   <option value="{{talle.numero}}">{{talle.numero}}</option>
                 </ng-container>
               </select></p>     
-             <!-- <p>  <button type="button" (click)="addToCart(ZapatillaCarrito)">Buy</button></p>      
-            -->
+             <p> <button type="button" (click)="addToCart(zapatillaCarrito)">Buy</button></p> 
         </div>
       </div>
         <div class="row flex-lg-row align-items-center g-5 py-5">

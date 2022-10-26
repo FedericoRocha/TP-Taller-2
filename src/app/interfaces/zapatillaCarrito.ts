@@ -1,4 +1,4 @@
-export interface zapatillaCarrito{
+export interface ZapatillaCarrito{
     id:number,
     nombre:string,
     imagen1:string, 
