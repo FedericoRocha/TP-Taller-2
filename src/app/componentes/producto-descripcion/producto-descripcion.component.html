@@ -3,28 +3,20 @@
 
     <div class="row flex-lg-row align-items-center g-5 py-5">
         <div class="col-10 col-sm-8 col-lg-6">
-            <img src="./assets/zapatilla1.webp" class="card-img-top">
+            <img [src]=zapatillaDescripcion.imagen1 class="card-img-top">
         </div>
-        <div class="col-lg-6">
-            <p class="fs-2">Zapatillas adidas Gamecourt 2</p>
+        <div class="col-lg-6" *ngIf="zapatillaDescripcion">
+            <p class="fs-2">{{zapatillaDescripcion.nombre}}</p>
             <p class="fs-3">Envio Gratis</p>
-            <p class="fs-3">precio </p>
-        
-            <p class="fs-3"> <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                <option selected>Color</option>
-                <option value="1">negro</option>
-                <option value="2">blanco</option>
-                <option value="3">rojo</option>
-              </select></p>
-        
-            <p class="fs-3">    <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+            <p class="fs-3">{{zapatillaDescripcion.precio}} </p>
+            <p class="fs-3"><select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                 <option selected>Talle</option>
-                <option value="1">38</option>
-                <option value="2">39</option>
-                <option value="3">40</option>
+                <ng-container *ngFor="let talle of talles">
+                  <option value="{{talle.numero}}">{{talle.numero}}</option>
+                </ng-container>
               </select></p>     
-              <p> <button type="button" class="btn btn-primary btn-sm">Agregar al Carrito</button></p>      
-    
+             <!-- <p>  <button type="button" (click)="addToCart(ZapatillaCarrito)">Buy</button></p>      
+            -->
         </div>
       </div>
         <div class="row flex-lg-row align-items-center g-5 py-5">
@@ -36,8 +28,8 @@
               </ul>
             <h3>Especificaciones</h3>
             <ul class="list-group-border-color:white">
-                <li class="list-group-item">Disciplina:	TREKKING</li>
-                <li class="list-group-item">Material: SINTETICO</li>
+                <li class="list-group-item">Disciplina: {{zapatillaDescripcion.disciplina}}</li>
+                <li class="list-group-item">Material: {{zapatillaDescripcion.material}}</li>
             </ul>
     
         </div>

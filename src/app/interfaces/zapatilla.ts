@@ -1,0 +1,16 @@
+export interface Zapatilla {
+    id:number,
+    nombre:string,
+    precio:number,
+    cantidad:number,
+    color:string,
+    ano:number,
+    marca:string,
+    linkcompra:string,
+    imagen1:string, 
+    imagen2:string, 
+    imagen3:string,
+    imagen4:string,
+    pocoStock: boolean,
+    oferta:boolean,
+}

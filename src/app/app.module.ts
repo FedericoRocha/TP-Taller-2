@@ -10,6 +10,7 @@ import { CarrouselCardsComponent } from './componentes/componentes-especificos/c
 import { HomeComponent } from './componentes/home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 
+
 import { CarrouselCards2Component } from './componentes/componentes-especificos/carrousel-cards2/carrousel-cards2.component';
 import { CarrouselCardsPromosComponent } from './componentes/componentes-especificos/carrousel-cards-promos/carrousel-cards-promos.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,9 +20,9 @@ import { VigilanteGuard } from 'src/app/guard/vigilante.guard';
 
 import { PerfilComponent } from './componentes/componentes-especificos/perfil/perfil.compoent';
 import { ContactoComponent } from './componentes/componentes-especificos/contacto/contacto.component';
-import { ProductoComponent } from './componentes/componentes-especificos/producto/producto.component';
 import { ProductoDescripcionComponent } from './componentes/producto-descripcion/producto-descripcion.component';
 import { CarritoComponent } from './componentes/carrito/carrito.component';
+
 
 
 
@@ -33,7 +34,6 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'crearcuenta', component: CrearcuentaComponent },
   // producto tiene que ser un modelo no una pagina, no tengo idea de como redireccionarla para que se cargen los datos dle producto seleccionado
-  { path: 'producto', component: ProductoComponent }, 
   { path: 'productoDescripcion', component: ProductoDescripcionComponent }, 
   { path: 'carrito', component: CarritoComponent }, 
   { path: 'perfil', component: PerfilComponent },  
@@ -46,7 +46,6 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NavbarComponent,
-    ProductoComponent,
     PerfilComponent,
     FooterComponent,
     CarrouselComponent,
