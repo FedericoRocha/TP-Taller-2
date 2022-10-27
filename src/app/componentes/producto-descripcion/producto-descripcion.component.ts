@@ -35,7 +35,7 @@ export class ProductoDescripcionComponent implements OnInit {
     material:"SINTETICO",
     descripcionProducto:"• Construida sobre una base de alto rendimiento para brindar máxima sujeción y comodidad. Con una suela exterior duradera que proporciona un agarre prolongado en superficies mojadas Un antepié más ancho proporciona el ajuste cómodo que necesita para recorridos más largos.",
   }
-  talles:Talles[]=[{ numero:35 },{ numero:37 },{ numero:40 }
+  talles:Talles[]=[{ numero:35,stock:10 },{ numero:37,stock:1 },{ numero:40,stock:5 }
 ]
 
   constructor(

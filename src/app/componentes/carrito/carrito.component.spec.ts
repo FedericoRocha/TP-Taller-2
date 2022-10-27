@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CarritoComponent } from './carrito.component';
+import{CartService} from 'src/app/services/cart.service';
 
 describe('CarritoComponent', () => {
   let component: CarritoComponent;

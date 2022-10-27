@@ -1,4 +1,5 @@
 export interface ZapatillaCarrito{
+  
     id:number,
     nombre:string,
     imagen1:string, 
@@ -7,4 +8,5 @@ export interface ZapatillaCarrito{
     marca:string,
     talle:number,
     cantidad:number,
+    stock:number,
 }

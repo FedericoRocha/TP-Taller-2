@@ -4,24 +4,34 @@
   <table class="table table-striped">
     <thead>
       <tr class="table-primary">
-        <th scope="col">#</th>
+        <th scope="col">id</th>
         <th scope="col">producto</th>
+        <th scope="col"></th>
         <th scope="col">precio</th>
         <th scope="col">cantidad</th>
         <th scope="col">total</th>
+        <td></td>
       </tr>
     </thead>
-    <tbody><tr>
-      <ng-container *ngFor=" let item of items">
-        
-          <th scope="row">1</th>
-          <td>{{item.id}}</td>
-          <td>{{item.nombre}}</td>
-          <td>{{item.talle}}</td>
+    <tbody> 
+      <ng-container *ngFor=" let item of items"> 
+        <tr>       
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.nombre}} Talle: {{item.talle}}</td>          
+          <td></td>
           <td>{{item.precio}}</td>
-        
+          <td>
+            <div class="input-group input-group-sm mb-3">
+              <button type="button" class="btn btn-light btn-sm" (click)="restarCantidad(item)">-</button>
+              <span> {{item.cantidad}}</span>
+              <button type="button" class="btn btn-light btn-sm" (click)="agregarCantidad(item)">+</button>
+            </div>
+        </td>
+        <td><button>Eliminar</button></td>
+          <td>total</td>
+        </tr>   
       </ng-container>
-    </tr>
+
 
     </tbody>
   </table>
@@ -39,4 +49,5 @@
       </tr>
     </thead>
   </table>
+  <button type="button" class="btn btn-light btn-sm" (click)="clearCart()">borrar carrito no tenog acceso</button>
   <app-footer></app-footer>

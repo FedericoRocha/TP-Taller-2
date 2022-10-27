@@ -28,6 +28,7 @@ import { CarritoComponent } from './componentes/carrito/carrito.component';
 
 
 
+
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contacto', component: ContactoComponent },
@@ -57,7 +58,8 @@ const appRoutes: Routes = [
     LoginComponent,
     CrearcuentaComponent,
     ProductoDescripcionComponent,
-    CarritoComponent
+    CarritoComponent,
+
 
   ],
   imports: [

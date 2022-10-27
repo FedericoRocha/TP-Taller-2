@@ -15,6 +15,7 @@ export class CartService {
     marca:"ADIDAS",
     talle:39,
     cantidad:1,
+    stock:2,
   },
   {
     id:1,
@@ -25,6 +26,7 @@ export class CartService {
     marca:"PUMA",
     talle:39,
     cantidad:1,
+    stock:10,
   }  
   ];
   addToCart(zapatillaCarrito: ZapatillaCarrito) {
