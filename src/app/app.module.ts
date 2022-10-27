@@ -24,11 +24,6 @@ import { ProductoDescripcionComponent } from './componentes/producto-descripcion
 import { CarritoComponent } from './componentes/carrito/carrito.component';
 
 
-
-
-
-
-
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contacto', component: ContactoComponent },
@@ -39,8 +34,8 @@ const appRoutes: Routes = [
   { path: 'carrito', component: CarritoComponent }, 
   { path: 'perfil', component: PerfilComponent },  
   // tenes que explicarme esta linea
-  { path: '**', pathMatch: 'full', redirectTo: 'login' },
-  
+   { path: '**', pathMatch: 'full', redirectTo: '' },
+     
 ];
 
 @NgModule({
