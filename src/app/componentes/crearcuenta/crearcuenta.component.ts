@@ -24,11 +24,11 @@ export class CrearcuentaComponent implements OnInit {
 
   ngOnInit(): void {
     this.crearCuentaForm = this._builder.group({
-      nombre: new FormControl('', Validators.pattern(/^[a-zA-Z\s]+$/)),
-      apellido: new FormControl('', Validators.pattern(/^[a-zA-Z\s]+$/)),
-      direccion: new FormControl('', Validators.pattern(/^[A-Za-z0-9\s]+$/g)),
-      email: new FormControl('',[Validators.required,Validators.email]),
-      password: new FormControl('',[Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).*$/)]),
+      nombre: new FormControl(''),
+      apellido: new FormControl(''),
+      direccion: new FormControl(''),
+      email: new FormControl(''),
+      password: new FormControl(''),
     });
   }
 

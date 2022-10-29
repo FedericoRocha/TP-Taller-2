@@ -10,8 +10,8 @@ const regAdress = /^[A-Za-z0-9\s]+$/g;
 const regPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).*$/;
 
 const poolData = {
-    UserPoolId : "us-east-1_M91mwzoeq", // Your user pool id here   
-    ClientId : "1hurpiotc60hcltv4vhn34igb" // Your client id here
+    UserPoolId : "us-east-1_uwr13ajqY", // Your user pool id here   
+    ClientId : "5q3au6daa727dgs3qea99slcau" // Your client id here
 }
 var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
@@ -120,7 +120,20 @@ crearcuenta: (req, res) => {
         },
       });
     },
+    newPasswordRequired: function(userAttributes, requiredAttributes) {
+      // User was signed up by an admin and must provide new
+      // password and required attributes, if any, to complete
+      // authentication.
+
+      // the api doesn't accept this field back
+      delete userAttributes.email_verified;
+
+      // store userAttributes on global variable
+      sessionUserAttributes = userAttributes;
+  }
+
 };
+
 
 
 module.exports = controller;

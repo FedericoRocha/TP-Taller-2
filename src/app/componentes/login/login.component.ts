@@ -57,7 +57,8 @@ onClick() {
         if (respuesta !== null && respuesta !== undefined) {
           this.authToken = respuesta;
           this.cookieService.set('token_access', this.authToken, 4, '/');
-          this.router.navigate(['/']);
+          
+          this.router.navigate(['/home-admin']);
           window.alert("Ha iniciado sesion correctamente");
 
           this.error = false;
