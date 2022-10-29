@@ -7,6 +7,7 @@ import { ZapatillaCarrito } from 'src/app/interfaces/zapatillaCarrito';
 export class CartService {
 
   items: ZapatillaCarrito[]=[];
+  carritoNumero:0;
 
   addToCart(zapatillaCarrito: ZapatillaCarrito) {
 
@@ -17,39 +18,46 @@ export class CartService {
     let existe = false;
     keys.forEach(key => {
       if ( key == zapatillaCarrito.key){
-        existe = true;
-        // saco el adicionar si exiistia, no puedo chequear que sigan disponibles el Stock del talle desde aca
-        //zapatillaCarrito.cantidad ++;
+        existe = true;     
         localStorage.setItem(zapatillaCarrito.key, JSON.stringify(zapatillaCarrito));
+        this.carritoNumero++;
+        localStorage.setItem("carrito", JSON.stringify(this.carritoNumero))
       }
     });
-    if (!existe) {
-      //this.items.push(zapatillaCarrito);
+    if (!existe) {      
       localStorage.setItem(zapatillaCarrito.key, JSON.stringify(zapatillaCarrito));
+      this.carritoNumero++;
+      localStorage.setItem("carrito", JSON.stringify(this.carritoNumero))
     }
   }
-  
+    
 
   getItems() {
     // recorrer elas keys guardadas, parse json
-    // pusharlas para retornar la lista creada
+    // agregar los items. para retornar la lista creada 
+    //regresarla
+    //tira error porque recarga cada vez que se cambia depagina
     const keys = Object.keys(localStorage);    
     keys.forEach(key => {	
       if(true==this.validarKey(key)){
      this.items.push(JSON.parse(localStorage[key]));}
+
+    
       });
       return this.items;
   }
 
   clearCart() {
-   // localStorage.clear();
+   // localStorage.clear();    
     const keys = Object.keys(localStorage);    
     keys.forEach(key => {	
       if(true==this.validarKey(key)){
       localStorage.removeItem(key);}
       });
+
     location. reload();
   }
+
   eliminarItem(key:string) {   
       localStorage.removeItem(key);
      location. reload();

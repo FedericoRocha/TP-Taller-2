@@ -37,7 +37,7 @@ export class ProductoDescripcionComponent implements OnInit {
   }
 
   talles:Talles[]=[{ numero:35,stock:10 },{ numero:37,stock:1 },{ numero:40,stock:5 }]
-  //talle:Talles;
+  //esto no tiene que traer talles en 0;
   talle:number;
 
  

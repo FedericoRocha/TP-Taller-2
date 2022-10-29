@@ -3,12 +3,17 @@ import { Router } from '@angular/router';
 //import { CarritoService } from 'src/app/services/carrito.service';
 //import { CookieService } from 'ngx-cookie-service';
 
+
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit{
+ 
+  //carritoNumero=0;  
+
   public productos = [];
   isLogged!: Boolean
 

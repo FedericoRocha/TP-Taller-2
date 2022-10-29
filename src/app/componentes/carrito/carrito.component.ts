@@ -11,19 +11,20 @@ import { CartService } from 'src/app/services/cart.service';
 export class CarritoComponent implements OnInit {
 
 
-  items = this.cartService.getItems();
+  items = this.cartService.getItems();// esto tira el error  
+
   total=0;
   envio=0;
   subtotal=0;
   
   constructor(
     private cartService: CartService
-  ) { }
+    
+  ) {}
 
   ngOnInit(): void {
-      this.items.forEach(zapatillaCarrito =>{
-      this.total=zapatillaCarrito.cantidad*zapatillaCarrito.precio
-    });    
+    this.calcularsubtotal();
+    
   }
     agregarCantidad(item:ZapatillaCarrito):void{
 
@@ -36,6 +37,7 @@ export class CarritoComponent implements OnInit {
       item.cantidad++;
       localStorage.setItem(item.key, JSON.stringify(item));
     }
+    this.calcularsubtotal();
 
   }
   restarCantidad(item:ZapatillaCarrito):void{
@@ -43,14 +45,24 @@ export class CarritoComponent implements OnInit {
       item.cantidad--;
       localStorage.setItem(item.key, JSON.stringify(item));
     }   
+    this.calcularsubtotal();
   }
 
   // nose como importar para borrar desde el servicio carrito
   clearCart(){
+    this.total=0;
     this.cartService.clearCart();
+
   }
   eliminarItem(key:string){
     this.cartService.eliminarItem(key);
+  }
+  calcularsubtotal(){
+    this.subtotal=0;
+    this.items.forEach(zapatillaCarrito =>{
+      this.subtotal+=zapatillaCarrito.cantidad*zapatillaCarrito.precio
+    });    
+    
   }
  
 
