@@ -13,6 +13,8 @@ export class CarritoComponent implements OnInit {
 
   items = this.cartService.getItems();
   total=0;
+  envio=0;
+  subtotal=0;
   
   constructor(
     private cartService: CartService
@@ -43,7 +45,7 @@ export class CarritoComponent implements OnInit {
     }   
   }
 
-  // nose como importar para borrar el carrito
+  // nose como importar para borrar desde el servicio carrito
   clearCart(){
     this.cartService.clearCart();
   }

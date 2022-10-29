@@ -1,7 +1,8 @@
 <app-navbar></app-navbar>
 
-<div class="container col-xxl-8 px-4 py-5">
-  <table class="table table-striped">
+
+    <div class="container col-xxl-8 px-4 py-5">
+      <table class="table table-striped">
     <thead>
       <tr class="table-primary">
         <th scope="col">id</th>
@@ -11,15 +12,14 @@
         <th scope="col">cantidad</th>
         <th scope="col"></th>
         <th scope="col">total</th>
-   
       </tr>
-    </thead>
-    <tbody> 
-      <!-- esto me tira el problema que duplica la cantidad de items en la vista-->           
-      <ng-container *ngFor=" let item of items"> 
-        <tr>       
+      </thead>
+     <tbody>
+      <!-- esto me tira el problema que duplica la cantidad de items en la vista-->
+      <ng-container *ngFor=" let item of items">
+        <tr>
           <td>{{item.key}}</td>
-          <td>{{item.nombre}} Talle: {{item.talle}}</td>          
+          <td>{{item.nombre}} Talle: {{item.talle}}</td>
           <td></td>
           <td>{{item.precio}}</td>
           <td>
@@ -28,27 +28,52 @@
               <span> {{item.cantidad}}</span>
               <button type="button" class="btn btn-light btn-sm" (click)="agregarCantidad(item)">+</button>
             </div>
-        </td>
-        <td><button type="button" class="btn btn-light btn-sm" (click)="eliminarItem(item.key)">Eliminar</button></td>
+          </td>
+          <td><button type="button" class="btn btn-outline-danger btn-sm"
+              (click)="eliminarItem(item.key)">Eliminar</button></td>
           <td>{{item.precio*item.cantidad | currency:'ARS ' :'symbol':'4.0-1'}}</td>
-        </tr>   
+        </tr>
       </ng-container>
-    </tbody>
-  </table>
-  <table class="table table-striped">
-    <thead>
-      <tr class="table-primary">
-        <th scope="col">dd</th>
-        <th scope="col">ss</th>
-        <th scope="col">aa</th>
-        <th>final</th>
-        <th> <span class="input-group-text">$</span>
-          <span class="input-group-text">{{total}}</span>
-        </th>
-      </tr>
-    </thead>
-  </table>
-  <button type="button" class="btn btn-light btn-sm" (click)="clearCart()">Borrar Carrito</button>
-  <button type="button" class="btn btn-light btn-sm" >Terminar Compra</button>
+     </tbody>
+   
+     </table>
+   </div>
 
-  <app-footer></app-footer>
+   <div class="container text-center">
+    <div class="row">
+      <div class="col-md-8">buscador punto de entrega</div>
+      <div class="col-6 col-md-4">
+   
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Sub Total</th>
+          <th scope="col"><span class="input-group-text">{{subtotal}}</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Envio</th>
+          <td><span class="input-group-text">{{envio}}</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Total</th>
+          <td><span class="input-group-text">{{total}}</span></td>
+        </tr>
+        <tr>
+          <th scope="row"><button type="button" class="btn btn-danger btn-sm" (click)="clearCart()">Borrar
+              Carrito</button></th>
+          <td><button type="button" class="btn btn-primary btn-sm">Terminar Compra</button></td>
+        </tr>
+      </tbody>
+     
+       </table>
+  
+    </div></div>
+  </div>
+</div>
+
+  
+
+<app-footer></app-footer>
