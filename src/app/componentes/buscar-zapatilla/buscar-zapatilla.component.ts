@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Zapatilla } from 'src/app/interfaces/zapatilla';
 import { ZapatillaCarrito } from 'src/app/interfaces/zapatillaCarrito';
 import { CartService } from 'src/app/services/cart.service';
 import { RestApiService } from 'src/app/services/restApiService';
@@ -11,7 +12,7 @@ import { RestApiService } from 'src/app/services/restApiService';
 })
 export class BuscarZapatillaComponent implements OnInit {
 
-  productos = [];
+  productos: Zapatilla[];
 
   constructor(private route: ActivatedRoute, private carrito: CartService,  private restApiService: RestApiService) { }
 

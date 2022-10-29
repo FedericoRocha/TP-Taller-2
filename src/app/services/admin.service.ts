@@ -11,7 +11,8 @@ export class AdminService {
 
   constructor() { }
 
-  agregar(producto: { id: number; clasificacion: string; marca: string; descripcion: string; precio: number; cantidad: number; disponible: boolean; imagen: string; }){
+  agregar(producto: { id:number,nombre:string,precio:number,cantidad:number,color:string,ano:number,marca:string,
+    linkcompra:string,imagen1:string, imagen2:string, imagen3:string,imagen4:string,pocoStock: boolean,oferta:boolean}){
       this.productos.push(producto);
       return this.productos;
   }
