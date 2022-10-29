@@ -1,5 +1,7 @@
+import { NumberSymbol } from "@angular/common";
+
 export interface ZapatillaCarrito{
-  
+    key:string,
     id:number,
     nombre:string,
     imagen1:string, 

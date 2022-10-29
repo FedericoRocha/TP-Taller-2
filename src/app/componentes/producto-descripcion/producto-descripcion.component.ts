@@ -59,15 +59,19 @@ export class ProductoDescripcionComponent implements OnInit {
     }
 
     let zapatillaCarrito = {} as ZapatillaCarrito;
-   zapatillaCarrito.id=zapatillaDescripcion.id;
+   
+    zapatillaCarrito.id=zapatillaDescripcion.id;
     zapatillaCarrito.nombre=zapatillaDescripcion.nombre;
     zapatillaCarrito.imagen1=zapatillaDescripcion.imagen1;
     zapatillaCarrito.precio=zapatillaDescripcion.precio;
     zapatillaCarrito.color=zapatillaDescripcion.color;
     zapatillaCarrito.marca=zapatillaDescripcion.marca;  
+
     zapatillaCarrito.talle=talles2.numero;
     zapatillaCarrito.stock=talles2.stock;
     zapatillaCarrito.cantidad=1;
+// formo una key compuesta para poder usarla en el local storage
+    zapatillaCarrito.key=zapatillaDescripcion.id+"-"+talles2.numero;
     this.cartService.addToCart(zapatillaCarrito);
     window.alert('Your product has been added to the cart!');
   }

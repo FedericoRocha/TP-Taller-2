@@ -5,42 +5,62 @@ import { ZapatillaCarrito } from 'src/app/interfaces/zapatillaCarrito';
   providedIn: 'root'
 })
 export class CartService {
-  
-  items: ZapatillaCarrito[] = [{
-    id:1,
-    nombre:"ADIDAS ORIGINALS NITEBALL 2.0",
-    imagen1:"./assets/zapatilla1.webp", 
-    precio:35999,
-    color:"negra",
-    marca:"ADIDAS",
-    talle:39,
-    cantidad:1,
-    stock:2,
-  },
-  {
-    id:1,
-    nombre:"PUMA TRC BLAZE",
-    imagen1:"./assets/zapatilla2.webp", 
-    precio:35999,
-    color:"negra",
-    marca:"PUMA",
-    talle:39,
-    cantidad:1,
-    stock:10,
-  }  
-  ];
+
+  items: ZapatillaCarrito[]=[];
+
   addToCart(zapatillaCarrito: ZapatillaCarrito) {
-    this.items.push(zapatillaCarrito);
+
+
+    // si no existe en el local storage se agrega
+     const keys = Object.keys(localStorage);
+
+    let existe = false;
+    keys.forEach(key => {
+      if ( key == zapatillaCarrito.key){
+        existe = true;
+        // saco el adicionar si exiistia, no puedo chequear que sigan disponibles el Stock del talle desde aca
+        //zapatillaCarrito.cantidad ++;
+        localStorage.setItem(zapatillaCarrito.key, JSON.stringify(zapatillaCarrito));
+      }
+    });
+    if (!existe) {
+      //this.items.push(zapatillaCarrito);
+      localStorage.setItem(zapatillaCarrito.key, JSON.stringify(zapatillaCarrito));
+    }
   }
+  
 
   getItems() {
-    return this.items;
+    // recorrer elas keys guardadas, parse json
+    // pusharlas para retornar la lista creada
+    const keys = Object.keys(localStorage);    
+    keys.forEach(key => {	
+      if(true==this.validarKey(key)){
+     this.items.push(JSON.parse(localStorage[key]));}
+      });
+      return this.items;
   }
 
   clearCart() {
-    this.items = [];
-    return this.items;
+   // localStorage.clear();
+    const keys = Object.keys(localStorage);    
+    keys.forEach(key => {	
+      if(true==this.validarKey(key)){
+      localStorage.removeItem(key);}
+      });
+    location. reload();
   }
+  eliminarItem(key:string) {   
+      localStorage.removeItem(key);
+     location. reload();
+   }
 
+
+ // porque? para filtrar que solo borren las keys de los productos, creo que se borra el token del usuario sino
+  private idRegex = /^\d{1,3}[-]\d{1,2}$/;  
+   validarKey(key: string) {    
+		return this.idRegex.test(key);
+	}
+  
   constructor() { }
 }

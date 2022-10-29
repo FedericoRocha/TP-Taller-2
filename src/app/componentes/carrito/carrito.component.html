@@ -9,14 +9,16 @@
         <th scope="col"></th>
         <th scope="col">precio</th>
         <th scope="col">cantidad</th>
+        <th scope="col"></th>
         <th scope="col">total</th>
-        <td></td>
+   
       </tr>
     </thead>
     <tbody> 
+      <!-- esto me tira el problema que duplica la cantidad de items en la vista-->           
       <ng-container *ngFor=" let item of items"> 
         <tr>       
-          <th scope="row">{{item.id}}</th>
+          <td>{{item.key}}</td>
           <td>{{item.nombre}} Talle: {{item.talle}}</td>          
           <td></td>
           <td>{{item.precio}}</td>
@@ -27,27 +29,26 @@
               <button type="button" class="btn btn-light btn-sm" (click)="agregarCantidad(item)">+</button>
             </div>
         </td>
-        <td><button>Eliminar</button></td>
-          <td>total</td>
+        <td><button type="button" class="btn btn-light btn-sm" (click)="eliminarItem(item.key)">Eliminar</button></td>
+          <td>{{item.precio*item.cantidad | currency:'ARS ' :'symbol':'4.0-1'}}</td>
         </tr>   
       </ng-container>
-
-
     </tbody>
   </table>
-
   <table class="table table-striped">
     <thead>
       <tr class="table-primary">
-        <th scope="col"></th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <th scope="col">dd</th>
+        <th scope="col">ss</th>
+        <th scope="col">aa</th>
         <th>final</th>
         <th> <span class="input-group-text">$</span>
-          <span class="input-group-text">0.00</span>
+          <span class="input-group-text">{{total}}</span>
         </th>
       </tr>
     </thead>
   </table>
-  <button type="button" class="btn btn-light btn-sm" (click)="clearCart()">borrar carrito no tenog acceso</button>
+  <button type="button" class="btn btn-light btn-sm" (click)="clearCart()">Borrar Carrito</button>
+  <button type="button" class="btn btn-light btn-sm" >Terminar Compra</button>
+
   <app-footer></app-footer>
