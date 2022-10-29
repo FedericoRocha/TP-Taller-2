@@ -22,18 +22,25 @@ import { PerfilComponent } from './componentes/componentes-especificos/perfil/pe
 import { ContactoComponent } from './componentes/componentes-especificos/contacto/contacto.component';
 import { ProductoDescripcionComponent } from './componentes/producto-descripcion/producto-descripcion.component';
 import { CarritoComponent } from './componentes/carrito/carrito.component';
+import { BuscarZapatillaComponent } from './componentes/buscar-zapatilla/buscar-zapatilla.component';
+import { EditarProductoComponent } from './componentes/home-admin/editar-producto/editar-producto.component';
+import { AgregarProductoComponent } from './componentes/home-admin/agregar-producto/agregar-producto.component';
+import { HomeAdminComponent } from './componentes/home-admin/home-admin.component';
 
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contacto', component: ContactoComponent },
+  { path: 'home-admin', component: HomeAdminComponent },
+  { path: 'agregar-producto', component: AgregarProductoComponent },
+  { path: 'editar-producto/:id', component: EditarProductoComponent  , canActivate: [VigilanteGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'crearcuenta', component: CrearcuentaComponent },
   // producto tiene que ser un modelo no una pagina, no tengo idea de como redireccionarla para que se cargen los datos dle producto seleccionado
   { path: 'productoDescripcion', component: ProductoDescripcionComponent }, 
   { path: 'carrito', component: CarritoComponent }, 
   { path: 'perfil', component: PerfilComponent },  
-  // tenes que explicarme esta linea
+  { path: 'buscar-zapatilla', component: BuscarZapatillaComponent },
    { path: '**', pathMatch: 'full', redirectTo: '' },
      
 ];
@@ -54,7 +61,10 @@ const appRoutes: Routes = [
     CrearcuentaComponent,
     ProductoDescripcionComponent,
     CarritoComponent,
-
+    BuscarZapatillaComponent,
+    HomeAdminComponent,
+    AgregarProductoComponent,
+    EditarProductoComponent
 
   ],
   imports: [

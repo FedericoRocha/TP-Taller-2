@@ -25,7 +25,7 @@ export class RestApiService {
     constructor(private http: HttpClient) { }
 
     //este método va a retornar un Observable q va a ser la rta de la busqueda
-    buscarZapatillas(valorBusqueda: any): Observable<any> {
+    buscarZapatillas(valorBusqueda: string | undefined): Observable<any> {
 
         if (valorBusqueda != "" && valorBusqueda != undefined) {
 
