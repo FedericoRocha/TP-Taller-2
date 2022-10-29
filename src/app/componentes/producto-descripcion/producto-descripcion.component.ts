@@ -57,7 +57,6 @@ export class ProductoDescripcionComponent implements OnInit {
         talles2=this.talles[i];
       }
     }
-
     let zapatillaCarrito = {} as ZapatillaCarrito;
    
     zapatillaCarrito.id=zapatillaDescripcion.id;
@@ -78,4 +77,5 @@ export class ProductoDescripcionComponent implements OnInit {
 
   ngOnInit(): void {    
   }
+
 }

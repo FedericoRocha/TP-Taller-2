@@ -7,8 +7,8 @@ module.exports = (app) => {
         //cuando se llame a esta url, se ejecuta este método
         '/productos/getAll', (req, res) => {
 
-            //se guarda la golosina que se buscó en el input
-            var valorBusqueda = req.query.golosina;
+            //se guarda la zapatillas que se buscó en el input
+            var valorBusqueda = req.query.zapatilla;
 
             //se llama al metodogetAll de Servicios y se coloca el resultado en la variable
             let productos = productosServices.getAll(valorBusqueda);

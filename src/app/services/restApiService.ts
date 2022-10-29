@@ -29,15 +29,13 @@ export class RestApiService {
 
         if (valorBusqueda != "" && valorBusqueda != undefined) {
 
-            //hace una llamada get a esa url (a la api, Node) y retorna la respuesta al /componenteBuscarGolosina y BuscarGolosina lo asigna a la propiedad productos usada ///en el front
+            //hace una llamada get a esa url (a la api, Node) y retorna la respuesta al /componenteBuscarzapatilla y Buscarzapatilla lo asigna a la propiedad productos usada ///en el front
             return this.http.get<any>(this.apiURL + '/productos/getAll?zapatilla=' + valorBusqueda);
         }
 
         return this.http
             .get<any>(this.apiURL + '/productos/getAll');
     }
-
-
 
 
     agregarProductoNuevo(producto: any): Observable<any> {
