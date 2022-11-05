@@ -42,4 +42,9 @@ export class RestApiService {
         console.log(producto);
         return this.http.post<any>(this.apiURL + '/productos/createProducto', producto, this.httpOptions);
     }
+    
+    ZapatillaOferta(){
+        return this.http.get<any>(this.apiURL + '/productos/getOnSale',  this.httpOptions);
+    }
+
 }

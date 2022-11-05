@@ -27,42 +27,42 @@ module.exports = (app) => {
     });
 
 
-    app.get('/productos/getMarcas', (res) => {
+    app.get('/productos/getMarcas', (req, res) => {
         let marca = productosServices.getMarcas();
 
         res.send(marca)
     });
 
 
-    app.get('/productos/getTipos', (res) =>{
+    app.get('/productos/getTipos', (req, res) =>{
         let tipos = productosServices.getTipos();
 
         res.send(tipos);
     });
 
 
-    app.get('/productos/getMaterials', (res) =>{
+    app.get('/productos/getMaterials', (req, res) =>{
         let matirials = productosServices.getMaterials();
 
         res.send(matirials);
     });
 
 
-    app.get('/productos/getColors', (res) => {
+    app.get('/productos/getColors', (req, res) => {
         let colors = productosServices.getColors();
 
         res.send(colors);
     });
 
 
-    app.get('/productos/getImage', (res) =>{
+    app.get('/productos/getImage', (req, res) =>{
         let image = productosServices.getImage();
 
         res.send(image);
     });
 
 
-    app.get('/productos/getOnSale', (res) =>{
+    app.get('/productos/getOnSale', (req, res) =>{
         let productsOnSale = productosServices.getOnSale();
 
         res.send(productsOnSale);

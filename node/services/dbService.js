@@ -2,7 +2,7 @@
 var mysql = require('mysql');
 var connection = mysql.createConnection({
     host: 'localhost',
-    user: 'admin',
+    user: 'grip',
     password: 'admin',
     database: 'taller2',
     port: 3306
@@ -18,7 +18,6 @@ var connection = mysql.createConnection({
  });
 
 //TODO Definir Tablas
-
 
 getAllShoes = () =>{
     var query = connection.query(
