@@ -1,5 +1,7 @@
 const productosRoutes = require('../routes/productosRoutes');
 
+const db = require('../services/dbService')
+
 const productosEnLaBaseDeDatos=[
     { id: 1,  nombre: 'zapatilla adidas', precio : 30000, cantidad: 10, color: 'negra', ano: 2020, marca: 'adidas', linkcompra : '', imagen1: '', imagen2: '', imagen3: '', imagen4: '', pocoStock: false, oferta: false }
 ];
@@ -7,20 +9,18 @@ const productosEnLaBaseDeDatos=[
 
 const getAll = (valorBusqueda) => {
     if (valorBusqueda != "" && valorBusqueda != undefined) {
-        return productosEnLaBaseDeDatos.filter(p =>
-            //el include es como el like
-            p.marca.toUpperCase().includes(valorBusqueda.toUpperCase(valorBusqueda)));
+        return db.getShoesFiltered(valorBusqueda);
     }
     else {
-        return productosEnLaBaseDeDatos;
+        return db.getAllShoes();
     }
 }
 
 const getById = (id) => {
-    return productosEnLaBaseDeDatos.find(producto => producto.id == id);
+    return db.getShoeById(id);
 }
 
-const createProducto = (producto) => {
+/*const createProducto = (producto) => {
 
     let marca = producto.marca;
     let descripcion = producto.descripcion;
@@ -49,6 +49,36 @@ const editProducto = (producto) => {
 const deleteProducto = (id) => {
 
     console.log(id);
+}*/
+
+const getMaterials = () =>{
+    return db.getMaterials();
 }
 
-module.exports = { getAll, getById, createProducto, editProducto, deleteProducto }
+const getColors = () => {
+    return db.getColors();
+}
+
+
+const getMarcas = () =>{
+    return db.getAllMarcas();
+}
+
+const getTipos = () =>{
+    return db.getTipos();
+}
+
+const getOnSale = () =>{
+    return db.getShoesOnSale();
+}
+
+const finishPurchase = (purchase) =>{
+    return db.addPurchase(purchase.idCompra, purchase.idProducto, purchase.cliente);
+}
+
+const getImage = (idProducto) =>{
+    return db.getImageForProduct(idProducto);
+}
+
+
+module.exports = { getAll, getById,getMaterials,getColors ,getMarcas,getTipos,getOnSale,finishPurchase,getImage}

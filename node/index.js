@@ -34,5 +34,8 @@ app.use(bodyParser.json());
 // Añadir prefijos a las rutas / Cargar rutas
 app.use('/api', cognito);
 
+
+
+
 // Exportar modulo (fichero actual)
 module.exports = app;

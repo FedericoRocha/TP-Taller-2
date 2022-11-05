@@ -26,7 +26,59 @@ module.exports = (app) => {
         res.send(producto);
     });
 
-    app.post('/productos/create', (req, res) => {
+
+    app.get('/productos/getMarcas', (res) => {
+        let marca = productosServices.getMarcas();
+
+        res.send(marca)
+    });
+
+
+    app.get('/productos/getTipos', (res) =>{
+        let tipos = productosServices.getTipos();
+
+        res.send(tipos);
+    });
+
+
+    app.get('/productos/getMaterials', (res) =>{
+        let matirials = productosServices.getMaterials();
+
+        res.send(matirials);
+    });
+
+
+    app.get('/productos/getColors', (res) => {
+        let colors = productosServices.getColors();
+
+        res.send(colors);
+    });
+
+
+    app.get('/productos/getImage', (res) =>{
+        let image = productosServices.getImage();
+
+        res.send(image);
+    });
+
+
+    app.get('/productos/getOnSale', (res) =>{
+        let productsOnSale = productosServices.getOnSale();
+
+        res.send(productsOnSale);
+    });
+
+
+    app.put('/productos/finishPurchase' , (req,res) => {
+
+        let purchase = req.body;
+
+        let pruchaseFinished = productosServices.finishPurchase(purchase);
+
+        res.send(pruchaseFinished);
+    });
+
+    /*app.post('/productos/create', (req, res) => {
 
         let producto = req.body;
 
@@ -54,5 +106,5 @@ module.exports = (app) => {
     app.post('/confirmar-compra', (req, res) => {
         console.log(req.body);
         res.send();
-    })
+    })*/
 }

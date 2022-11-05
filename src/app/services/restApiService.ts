@@ -40,6 +40,6 @@ export class RestApiService {
 
     agregarProductoNuevo(producto: any): Observable<any> {
         console.log(producto);
-        return this.http.post<any>(this.apiURL + '/productos/create', producto, this.httpOptions);
+        return this.http.post<any>(this.apiURL + '/productos/createProducto', producto, this.httpOptions);
     }
 }
