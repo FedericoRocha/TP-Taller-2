@@ -63,7 +63,6 @@ export class CartService {
      location. reload();
    }
 
-
  // porque? para filtrar que solo borren las keys de los productos, creo que se borra el token del usuario sino
   private idRegex = /^\d{1,3}[-]\d{1,2}$/;  
    validarKey(key: string) {    

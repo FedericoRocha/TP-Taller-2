@@ -1,29 +1,212 @@
 drop database taller2;
-
 create database taller2;
 use taller2;
 
-CREATE TABLE tipo (id int AUTO_INCREMENT PRIMARY KEY,  tipo varchar(60));
-insert into tipo (tipo)values ("Botines"),("Running"),("Traning"),("Outdoor"),("Padel"),("Diarias"),("Ojotas");
-CREATE TABLE marca (id int AUTO_INCREMENT PRIMARY KEY,  marca varchar(60));
-insert into marca (marca) values ("Adidas"),(" Nike"),("new Balance"),("Jhon foos"),("Fila"),("Puma"),("Reebok"),("Topper");
+CREATE TABLE tipo (id smallint AUTO_INCREMENT PRIMARY KEY,  tipo varchar(60));
+insert into tipo (tipo) values ("Botines"),("Botitas"),("Zapatillas"),("Outdoor"),("Urbanas"),("Ojotas");
+
+CREATE TABLE marca (id smallint AUTO_INCREMENT PRIMARY KEY,  marca varchar(60));
+insert into marca (marca) values ("Adidas"),(" Nike"),("New Balance"),("Converse"),("JohnFoos"),("Puma"),("Reebok"),("Topper"),("otros");
+
+CREATE TABLE color (id smallint AUTO_INCREMENT PRIMARY KEY,  color varchar(60));
+insert into color (color) values ("negro"),("blanco"),("rojo"),("azul"),("gris"),("marron"),("multicolor");
+
+CREATE TABLE material (id smallint AUTO_INCREMENT PRIMARY KEY,  material varchar(60));
+insert into material (material) values ("cuero"),("cuero sintetico"),("poliester"),("goma");
+
 
 CREATE TABLE productos (
-    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    id int AUTO_INCREMENT PRIMARY KEY,
     nombre varchar(60),
-    precio varchar(60),
-    cantidad BIGINT,
-    color varchar(60),
+    precio int,   
     ano int,
-    linkcompra varchar(250),
-    imagen1 varchar(250),
-    imagen2 varchar(250),
-    imagen3 varchar(250),
-    tipo int,
-    marca int,
+    oferta smallint DEFAULT 0,
+    disponible char DEFAULT 1,    
+    ecologica smallint,
+    fechaCarga DATE,
+    descripcion TEXT,    
+	tipo smallint,
+    marca smallint,
+	color smallint,
+    material smallint,
+	foreign key(material) references material(id),
+    foreign key(color) references color(id),
     foreign key(tipo) references tipo(id),
-	foreign key(marca) references marca(id)
-);
+	foreign key(marca) references marca(id));
+    
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Zapatillas adidas Response Super 30 ',27999,2022,0,'1',1,"20220504",'Corré contra el reloj con estas zapatillas de running adidas. Traen un exterior de malla transpirable y un cuello acolchado Geofit que sujeta el tobillo. Bounce en el talón y Bounce+ a lo largo del pie aumentan la sensación de amortiguación para una mayor velocidad y comodidad. La suela de caucho proporciona un agarre excelente, así que atrévete a dejar atrás el asfalto. Hecho con una serie de materiales reciclados, el exterior incorpora al menos un 50 % de contenido reciclado. Este producto representa solo una de nuestras soluciones para acabar con los residuos plásticos.',3,1,1,3);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Zapatillas adidas Galaxy 6 ',18999,2022,0,'1',0,"20220504",'Estas zapatillas adidas combinan tecnología y estilo para actualizar el popular diseño de las Galaxy 6. El exterior tejido ligera favorece el flujo de aire, la mediasuela Cloudfoam amortigua tus pasos y la suela de caucho ofrece un gran agarre sobre todo tipo de superficies. Así que ya sea que las uses para entrenar o para los fines de semana, se sentirán robustas y cómodas. Hecho con una serie de materiales reciclados, este exterior incorpora al menos un 50 % de contenido reciclado. Este producto representa solo una de nuestras soluciones para acabar con los residuos plásticos.',3,1,2,3);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Zapatillas adidas Supernova 2.0',31999,2022,0,'1',0,"20220504",'Sin importar si apenas comenzás a correr o si estás entrenando para tu primera carrera de 10K, estas zapatillas de running adidas te acompañan en el viaje. La amortiguación receptiva BOOST en la mediasuela hace más suaves tus aterrizajes y energizada cada paso, mientras que la amortiguación en el antepié ayuda a impulsarte hacia el frente. El exterior de malla con zonas de flexibilidad y ventilación localizadas mantiene tus pies cómodos para que puedas concentrarte en lograr tus objetivos. Hecho con una serie de materiales reciclados, este exterior incorpora al menos un 50 % de contenido reciclado. Este producto representa solo una de nuestras soluciones para acabar con los residuos plásticos.',3,1,5,3);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Zapatillas adidas Response',23999,2022,10,'1',0,"20220504",'Amortiguación y respuesta inmediata en cada salida a correr. Estas zapatillas adidas envuelven tus pies con la comodidad y sujeción necesaria para dominar en la pista y en los senderos. El exterior de malla trae un cuello acolchado para un ajuste ceñido y una mayor sensación de soporte. El estabilizador de talón moldeado Fitcounter proporciona un ajuste natural. La mediasuela Bounce brinda amortiguación y flexibilidad para una zancada natural y muy receptiva. Hecho con una serie de materiales reciclados, el exterior incorpora al menos un 50 % de contenido reciclado. Este producto representa solo una de nuestras soluciones para acabar con los residuos plásticos.',3,1,5,3);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('ZAPATILLAS ADIDAS SUPERSTAR',18000,2019,10,'1',0,"20220504",'Desde su debut en los años 70, las adidas Superstar han estado en un constante camino de cambio. Dejaron las canchas de básquet para hacerse un nombre en la escena musical y pasaron a convertirse en un ícono de estilo en todo el mundo. Ahora están evolucionando para ayudar a acabar con los residuos plásticos. El exterior tradicional se cambió por uno sintético, y el tirador del talón y la cincha de lengüeta se confeccionaron con plástico recogido de la playa. Confeccionadas con una serie de materiales reciclados, su exterior incorpora al menos un 50% de contenido reciclado. Este producto representa solo una de nuestras soluciones para acabar con los residuos plásticos.',5,1,2,2);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Zapatillas Nike React Miler 2',40999,2021,0,'1',0,"20220504",'Cuando correr se convierte en un hábito diario, la estabilidad y la comodidad son cruciales. Las Nike React Miler 2 lo ofrece todo, recuperando la amortiguación y el diseño intuitivo de su predecesor. La parte superior rediseñada ayuda a reducir el volumen, brindando soporte y una sensación de seguridad en carreras cortas o largas. Resistente y ligero La parte superior presenta una lona estructurada, colocada en áreas clave para brindar durabilidad con peso ligero y ventilación. Sensación de seguridad Una correa en la parte media del pie se ajusta al atar los cordones para proporcionar un ajuste seguro. Diseñadas para durar La suela de goma garantiza durabilidad y tracción para entrenamientos de alto kilometraje. El caucho de alta abrasión se coloca en las áreas con mayor desgaste.',3,2,1,3);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Zapatillas Nike Downshifter 11',22999,2022,0,'1',1,"20220504",'DETALLES Las NIKE Downshifter 11 te brindan un soporte ligero y flexible para que no te detengas. Mantiene la misma amortiguación suave de la última versión y agrega más soporte alrededor del mediopié para que sea cómodo incluso después del entrenamiento. La ventana translúcida te permite ver los soportes que se aprietan alrededor del pie al ajustarse los cordones. La amortiguación de espuma suave de la planta del pie y del talón proporciona comodidad y soporte para que te mantengas en movimiento. La suela de goma cuenta con ranuras en la parte inferior que crean tracción y la hacen flexible. La goma se curva hacia el exterior para amortiguar y añadir durabilidad. Diseñada para corredoras con pisada neutra.',3,2,4,4);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Zapatillas Nike Downshifter 10',10000,2022,0,'1',0,"20220504",'El Nike Downshifter 11 te brinda un soporte ligero y flexible para que sigas adelante. Continúa con la misma amortiguación suave de la última versión y agrega más soporte alrededor del mediopié para que sea cómodo de usar mucho después de tu entrenamiento. Soporte que puedes ver La ventana translúcida le permite ver los soportes que se ajustan alrededor de su pie cuando se ata. Comodidad acolchada La amortiguación de espuma suave debajo de los pies y en el talón brinda comodidad y soporte para que continúe. Durabilidad y Flexibilidad Una suela de goma tiene ranuras en la parte inferior que crean tracción y la hacen flexible. La goma se curva hacia arriba en la puntera para amortiguar y agregar durabilidad.',3,2,5,3);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Zapatillas Nike Revolution',19999,2022,0,'1',0,"20221104",'La comodidad es la clave de tu rutina de running. Fabricada con al menos un 20 % de contenido reciclado por peso, esta versión cuenta con puntos de contacto en el talón y la lengüeta para ponérselos y quitárselos fácilmente. Tiene una conducción más suave que su predecesora con una espuma que ayuda a crear un efecto de pistón natural para una flexibilidad aún mejor. Tiene un aspecto simple pero clásico con una marca audaz, lo que lo hace ideal para correr o usar ropa informal. Diseño simple La malla de felpa se coloca en la parte delantera del pie y a lo largo del cuello para una sensación cómoda. Las pieles adicionales en todas partes agregan durabilidad. Más flexibilidad La entresuela de espuma ofrece una pisada más suave que la Revolution 5. La suela exterior tiene un diseño generado por computadora que crea un efecto de pistón natural mientras corres, brindando más amortiguación y flexibilidad. Se combinan para una tracción duradera. Toque intuitivo Los puntos de contacto en el talón y la lengüeta crean una sensación natural cuando te pones y te quitas la zapatilla.',3,2,5,4);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Botines Puma Ultra Match Fg/Ag',26299,2022,10,'1',0,"20220504",'Los Botines Puma Ultra Match Fg/Ag están diseñados para que puedas lucir tus habilidades dentro de la cancha y correr la pelota como un profesional. La capellada presenta un diseño futurista y elegante con detalles de Puma y relieves para mejorar el contacto con la pelota. La suela es perfecta para terrenos sintéticos y naturales, permitiéndote demostrar tu valor en todas las canchas.',1,6,7,2);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Botines Puma Future Z 3.4 Fgag Adp ',24999,2019,0,'1',0,"20220504",'Más adaptable y cómoda que nunca, la avanzada FUTURE es un botin explosivo para jugadores que dan forma al juego según su visión y habilidad. No tienes que atarte los cordones para asegurarte. La tecnología FUZIONFIT+ de segunda generación se adapta a la forma de tu pie para brindarte el equilibrio perfecto entre soporte y flexibilidad en cada una de las zonas clave, asegurando un ajuste y rendimiento óptimos, con o sin cordones. La suela exterior liviana y reactiva Dynamic Motion System transfiere su energía directamente al campo, brindando una tracción superior para movimientos multidireccionales explosivos. Las Advanced Creator Zones están ubicadas estratégicamente en el área del antepié para brindar un toque excepcional y un control del balón a alta velocidad.',1,6,1,2);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Botines adidas X Speedportal.3 Tf',25999,2021,0,'1',1,"20220504",'Tiempo y espacio. Todo es relativo cuando juegas en una dimensión diferente. Ábrele las puertas a una velocidad multidimensional con la adidas X Speedportal. Esta zapatilla de fútbol para campos de moqueta presenta una suela de goma estriada que potencia la velocidad y una mediasuela de EVA que ofrece amortiguación y comodidad. La parte superior textil revestida y suave incluye un panel de punto plano alrededor del tobillo y un refuerzo externo de TPU que mantiene el pie firme y sujeto en las jugadas más veloces. La parte superior contiene al menos un 50% de materiales reciclados. Su objetivo es plantear otra solución más que ayude a eliminar los residuos plásticos.',1,1,1,2);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Botines adidas Copa Sense.3',25999,2022,0,'1',0,"20220504",'Césped Artificial Los botines con suela TF (Turf) generalmente tienen una entresuela acolchada y una suela de goma muy duradera, plana, con múltiples tapones o con hoyuelos porque el pasto requiere una ligera penetración de los tapones. Debido a la naturaleza dura de la superficie y la fricción que crea, no se debe usar ningún otro tipo de suela en el césped artificial porque generará un desgaste de los tapones y los bordes de la suela, pudiendo provocar lesiones. También pueden variar en altura para mejorar la tracción o pueden ser ahuecados para reducir el peso y mejorar la amortiguación. Pueden ser usados también en césped natural dependiendo de qué tan seco y firme esté.',1,1,1,1);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Ojotas adidas Adilette Shower',8999,2022,0,'1',1,"20221104",'Envolvé tus pies con comodidad. Estas ojotas combinan el estilo de las 3 Tiras con una cómoda suela de una sola pieza que incorpora tecnología Cloudfoampara ofrecerte la mayor amortiguación. Como toque final, tienen un logo linear llamativo al costado.',6,1,1,4);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Ojotas adidas Adilette Shower',8999,2022,0,'1',0,"20220504",'Envolvé tus pies con comodidad. Estas ojotas combinan el estilo de las 3 Tiras con una cómoda suela de una sola pieza que incorpora tecnología Cloudfoampara ofrecerte la mayor amortiguación. Como toque final, tienen un logo linear llamativo al costado.',6,1,4,4);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Ojotas Havaianas Top Pride Rainbow',6079,2022,20,'1',0,"20220504",'Las Havaianas Top Pride Raindow son el nuevo modelo para los amantes de la marca. Se destacan sus tiras con diseño en forma de greca, suela superior con motivos de granos de arroz y parte inferior con motivos de "ladrillo". Beneficios: comodidad, durabilidad, ligereza, resistencia al calor, no resbalan y resistentes al agua.',6,9,7,4);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Ojotas Puma Popcat 20 Adp Unisex',8999,2019,0,'1',0,"20220504",'Cálzate las Popcat 20, que derrochan el estilo Puma más clásico, y disfruta de un estilo y comodidad incomparables.',6,6,1,4);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Ojotas Puma Popcat 10 Adp Unisex',8999,2021,0,'1',0,"20221104",'Cálzate las Popcat 20, que derrochan el estilo Puma más clásico, y disfruta de un estilo y comodidad incomparables.',6,6,2,4);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('183 EVERY BLACK',16500,2022,0,'1',1,"20220504",'La nueva altura de John Foos es una propuesta clásica y distintiva que se enfoca en los detalles. Zapatilla de caña intermedia color negro. Detalles: Capellada en lona Trucker de alta resistencia y durabilidad color negro. Forrería: microcanvas 100% algodón negro. Plantilla extraíble de eva y base textil. Cordones de algodón encerado color negro. Etiqueta textil en lengua. Ojalillos color bronce. Suela exterior y banda de caucho vulcanizado de alta resistencia. Buepe y contrafuerte de caucho recuperado.',2,5,1,3);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('184 BLANCO',14000,2022,0,'1',0,"20220504",'Capellada de lona blanca . Forrería 100% de algodón blanco. Plantilla extraíble de caucho moldeado y base textil. Cordones de algodón blanco. Isologo con alta frecuencia en aplique de caña. Etiqueta textil con logo color blanco en lengua. Ojalillera de aluminio . Suela exterior y banda de caucho vulcanizado de alta resistencia. Contrafuerte y buepe de caucho.',2,5,2,3);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('BOTAS JOHN FOOS TOTALLY BLACK NEGRA',14820,2022,15,'1',0,"20220504",'La nueva altura de John Foos es una propuesta clásica y distintiva que se enfoca en los detalles. Zapatilla de caña intermedia color negro. Detalles: Capellada en lona Trucker de alta resistencia y durabilidad color negro. Forrería: microcanvas 100% algodón negro. Plantilla extraíble de eva y base textil. Cordones de algodón encerado color negro. Etiqueta textil en lengua. Ojalillos color bronce. Suela exterior y banda de caucho vulcanizado de alta resistencia. Buepe y contrafuerte de caucho recuperado.',2,5,1,3);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Chuck Taylor All Star',13200,2022,0,'1',0,"20220504",'Podríamos decir que son las zapatillas de basketball originales creadas hace más de 100 años. O que el diseño se ha mantenido igual en su gran mayoría, porque si algo funciona, ¿por qué cambiarlo? También podríamos contarte cómo se convirtieron en las zapatillas oficiales de todos tus artistas y músicos favoritos, que las hicieron suyas. Sí, podríamos compartir mil y una historias, pero la historia más importante no es la nuestra, es la tuya. Lo fundamental es cómo y dónde lucis tus Chuck. El gran legado estará siempre ahí, pero el resto depende de vos. Nosotros solo creamos las zapatillas. Vos escribís las historias.',2,4,4,3);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Chuck Taylor All Star',13200,2019,0,'1',0,"20221104",'Podríamos decir que son las zapatillas de basketball originales creadas hace más de 100 años. O que el diseño se ha mantenido igual en su gran mayoría, porque si algo funciona, ¿por qué cambiarlo? También podríamos contarte cómo se convirtieron en las zapatillas oficiales de todos tus artistas y músicos favoritos, que las hicieron suyas. Sí, podríamos compartir mil y una historias, pero la historia más importante no es la nuestra, es la tuya. Lo fundamental es cómo y dónde lucis tus Chuck. El gran legado estará siempre ahí, pero el resto depende de vos. Nosotros solo creamos las zapatillas. Vos escribís las historias.',2,4,6,3);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Chuck Taylor All Star',13200,2021,0,'1',1,"20221104",'Podríamos decir que son las zapatillas de basketball originales creadas hace más de 100 años. O que el diseño se ha mantenido igual en su gran mayoría, porque si algo funciona, ¿por qué cambiarlo? También podríamos contarte cómo se convirtieron en las zapatillas oficiales de todos tus artistas y músicos favoritos, que las hicieron suyas. Sí, podríamos compartir mil y una historias, pero la historia más importante no es la nuestra, es la tuya. Lo fundamental es cómo y dónde lucis tus Chuck. El gran legado estará siempre ahí, pero el resto depende de vos. Nosotros solo creamos las zapatillas. Vos escribís las historias.',2,4,1,3);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Chuck Taylor All Star',13200,2022,0,'1',0,"20221104",'Podríamos decir que son las zapatillas de basketball originales creadas hace más de 100 años. O que el diseño se ha mantenido igual en su gran mayoría, porque si algo funciona, ¿por qué cambiarlo? También podríamos contarte cómo se convirtieron en las zapatillas oficiales de todos tus artistas y músicos favoritos, que las hicieron suyas. Sí, podríamos compartir mil y una historias, pero la historia más importante no es la nuestra, es la tuya. Lo fundamental es cómo y dónde lucis tus Chuck. El gran legado estará siempre ahí, pero el resto depende de vos. Nosotros solo creamos las zapatillas. Vos escribís las historias.',2,4,2,3);
+insert into productos(nombre,precio,ano,oferta,disponible,ecologica,fechaCarga,descripcion,tipo,marca,color,material) values('Chuck Taylor All Star',13200,2022,0,'1',0,"20221104",'Podríamos decir que son las zapatillas de basketball originales creadas hace más de 100 años. O que el diseño se ha mantenido igual en su gran mayoría, porque si algo funciona, ¿por qué cambiarlo? También podríamos contarte cómo se convirtieron en las zapatillas oficiales de todos tus artistas y músicos favoritos, que las hicieron suyas. Sí, podríamos compartir mil y una historias, pero la historia más importante no es la nuestra, es la tuya. Lo fundamental es cómo y dónde lucis tus Chuck. El gran legado estará siempre ahí, pero el resto depende de vos. Nosotros solo creamos las zapatillas. Vos escribís las historias.',2,4,3,3);
 
-create table cantidadPorTalle(idproducto BIGINT, talle BIGINT, cantidad bigint, foreign key(idproducto) references productos(id), primary key(idproducto,talle)); 
 
+
+create table imagenesProductos(id int AUTO_INCREMENT PRIMARY KEY, idProducto int, link varchar(250), foreign key (idProducto) references productos(id));
+insert into imagenesProductos(idProducto,link) values (1,'https://iili.io/mNwBqB.webp');
+insert into imagenesProductos(idProducto,link) values (1,'https://iili.io/mNwfsV.webp');
+insert into imagenesProductos(idProducto,link) values (1,'https://iili.io/mNwng1.webp');
+insert into imagenesProductos(idProducto,link) values (1,'https://iili.io/mNwC0P.webp');
+insert into imagenesProductos(idProducto,link) values (2,'https://iili.io/mNwFzx.webp');
+insert into imagenesProductos(idProducto,link) values (2,'https://iili.io/mNw2bj.webp');
+insert into imagenesProductos(idProducto,link) values (2,'https://iili.io/mNwdOb.webp');
+insert into imagenesProductos(idProducto,link) values (2,'https://iili.io/mNwJ5u.webp');
+insert into imagenesProductos(idProducto,link) values (3,'https://iili.io/mNwHJe.webp');
+insert into imagenesProductos(idProducto,link) values (3,'https://iili.io/mNjyg9.webp');
+insert into imagenesProductos(idProducto,link) values (3,'https://iili.io/mNjp07.webp');
+insert into imagenesProductos(idProducto,link) values (3,'https://iili.io/mNjmfS.webp');
+insert into imagenesProductos(idProducto,link) values (4,'https://iili.io/mNjDs2.webp');
+insert into imagenesProductos(idProducto,link) values (4,'https://iili.io/mNjtWl.webp');
+insert into imagenesProductos(idProducto,link) values (4,'https://iili.io/mNjZx4.webp');
+insert into imagenesProductos(idProducto,link) values (4,'https://iili.io/mNjLbf.webp');
+insert into imagenesProductos(idProducto,link) values (5,'https://iili.io/mNjsOG.webp');
+insert into imagenesProductos(idProducto,link) values (5,'https://iili.io/mNjiRs.webp');
+insert into imagenesProductos(idProducto,link) values (5,'https://iili.io/mNjPJn.webp');
+insert into imagenesProductos(idProducto,link) values (5,'https://iili.io/mNj4UX.webp');
+insert into imagenesProductos(idProducto,link) values (6,'https://iili.io/mNjrlt.webp');
+insert into imagenesProductos(idProducto,link) values (6,'https://iili.io/mNjgfI.webp');
+insert into imagenesProductos(idProducto,link) values (6,'https://iili.io/mNjSiN.webp');
+insert into imagenesProductos(idProducto,link) values (6,'https://iili.io/mNj8Vp.webp');
+insert into imagenesProductos(idProducto,link) values (7,'https://iili.io/mNjvxR.webp');
+insert into imagenesProductos(idProducto,link) values (7,'https://iili.io/mNjeDv.webp');
+insert into imagenesProductos(idProducto,link) values (7,'https://iili.io/mNjOOJ.webp');
+insert into imagenesProductos(idProducto,link) values (7,'https://iili.io/mNjNRa.webp');
+insert into imagenesProductos(idProducto,link) values (8,'https://iili.io/mNjwHg.webp');
+insert into imagenesProductos(idProducto,link) values (8,'https://iili.io/mNjhUF.webp');
+insert into imagenesProductos(idProducto,link) values (8,'https://iili.io/mNjXl1.webp');
+insert into imagenesProductos(idProducto,link) values (8,'https://iili.io/mNjWKP.webp');
+insert into imagenesProductos(idProducto,link) values (9,'https://iili.io/mNjGVV.webp');
+insert into imagenesProductos(idProducto,link) values (9,'https://iili.io/mNjMiB.webp');
+insert into imagenesProductos(idProducto,link) values (9,'https://iili.io/mNjEoQ.webp');
+insert into imagenesProductos(idProducto,link) values (9,'https://iili.io/mNj0Dx.webp');
+insert into imagenesProductos(idProducto,link) values (10,'https://iili.io/mNjlNj.webp');
+insert into imagenesProductos(idProducto,link) values (10,'https://iili.io/mNjcAb.webp');
+insert into imagenesProductos(idProducto,link) values (10,'https://iili.io/mNjaHu.webp');
+insert into imagenesProductos(idProducto,link) values (10,'https://iili.io/mNj7Se.webp');
+insert into imagenesProductos(idProducto,link) values (11,'https://iili.io/mNj5l9.webp');
+insert into imagenesProductos(idProducto,link) values (11,'https://iili.io/mNjRK7.webp');
+insert into imagenesProductos(idProducto,link) values (11,'https://iili.io/mNjuPS.webp');
+insert into imagenesProductos(idProducto,link) values (11,'https://iili.io/mNjTV2.webp');
+insert into imagenesProductos(idProducto,link) values (12,'https://iili.io/mNjIol.webp');
+insert into imagenesProductos(idProducto,link) values (12,'https://iili.io/mNjoNf.webp');
+insert into imagenesProductos(idProducto,link) values (12,'https://iili.io/mNjnAG.webp');
+insert into imagenesProductos(idProducto,link) values (12,'https://iili.io/mNjxt4.webp');
+insert into imagenesProductos(idProducto,link) values (13,'https://iili.io/mNjC9s.webp');
+insert into imagenesProductos(idProducto,link) values (13,'https://iili.io/mNjfcX.webp');
+insert into imagenesProductos(idProducto,link) values (13,'https://iili.io/mNjKFt.webp');
+insert into imagenesProductos(idProducto,link) values (13,'https://iili.io/mNjqSn.webp');
+insert into imagenesProductos(idProducto,link) values (14,'https://iili.io/mNj3PI.webp');
+insert into imagenesProductos(idProducto,link) values (14,'https://iili.io/mNj2MN.webp');
+insert into imagenesProductos(idProducto,link) values (14,'https://iili.io/mNjdnp.webp');
+insert into imagenesProductos(idProducto,link) values (14,'https://iili.io/mNjHtR.webp');
+insert into imagenesProductos(idProducto,link) values (15,'https://iili.io/mNj9wv.webp');
+insert into imagenesProductos(idProducto,link) values (15,'https://iili.io/mNhp9a.webp');
+insert into imagenesProductos(idProducto,link) values (15,'https://iili.io/mNhb8g.webp');
+insert into imagenesProductos(idProducto,link) values (15,'https://iili.io/mNhDcF.webp');
+insert into imagenesProductos(idProducto,link) values (16,'https://iili.io/mNhyAJ.webp');
+insert into imagenesProductos(idProducto,link) values (16,'https://iili.io/mNhLMB.webp');
+insert into imagenesProductos(idProducto,link) values (16,'https://iili.io/mNhtF1.webp');
+insert into imagenesProductos(idProducto,link) values (17,'https://iili.io/mNhsnV.webp');
+insert into imagenesProductos(idProducto,link) values (17,'https://iili.io/mNhPZQ.webp');
+insert into imagenesProductos(idProducto,link) values (17,'https://iili.io/mNh6wx.webp');
+insert into imagenesProductos(idProducto,link) values (17,'https://iili.io/mNh4uj.webp');
+insert into imagenesProductos(idProducto,link) values (18,'https://iili.io/mNhgyb.webp');
+insert into imagenesProductos(idProducto,link) values (18,'https://iili.io/mNhU8u.webp');
+insert into imagenesProductos(idProducto,link) values (18,'https://iili.io/mNhSae.webp');
+insert into imagenesProductos(idProducto,link) values (18,'https://iili.io/mNh8F9.webp');
+insert into imagenesProductos(idProducto,link) values (19,'https://iili.io/mNhk67.webp');
+insert into imagenesProductos(idProducto,link) values (19,'https://iili.io/mNheGS.webp');
+insert into imagenesProductos(idProducto,link) values (19,'https://iili.io/mNhOn2.webp');
+insert into imagenesProductos(idProducto,link) values (19,'https://iili.io/mNhwZl.webp');
+insert into imagenesProductos(idProducto,link) values (20,'https://iili.io/mNhWyG.webp');
+insert into imagenesProductos(idProducto,link) values (20,'https://iili.io/mNhjj4.webp');
+insert into imagenesProductos(idProducto,link) values (21,'https://iili.io/mNhVvs.jpg');
+insert into imagenesProductos(idProducto,link) values (21,'https://iili.io/mNhMan.jpg');
+insert into imagenesProductos(idProducto,link) values (21,'https://iili.io/mNhG3X.jpg');
+insert into imagenesProductos(idProducto,link) values (21,'https://iili.io/mNh14t.jpg');
+insert into imagenesProductos(idProducto,link) values (22,'https://iili.io/mNh0GI.jpg');
+insert into imagenesProductos(idProducto,link) values (22,'https://iili.io/mNhlCN.jpg');
+insert into imagenesProductos(idProducto,link) values (22,'https://iili.io/mNhaQp.jpg');
+insert into imagenesProductos(idProducto,link) values (22,'https://iili.io/mNhYjR.jpg');
+insert into imagenesProductos(idProducto,link) values (23,'https://iili.io/mNh7Tv.jpg');
+insert into imagenesProductos(idProducto,link) values (23,'https://iili.io/mNhAva.jpg');
+insert into imagenesProductos(idProducto,link) values (23,'https://iili.io/mNhRyJ.jpg');
+insert into imagenesProductos(idProducto,link) values (23,'https://iili.io/mNhuYg.jpg');
+insert into imagenesProductos(idProducto,link) values (24,'https://iili.io/mNhT3F.jpg');
+insert into imagenesProductos(idProducto,link) values (24,'https://iili.io/mNhz41.jpg');
+insert into imagenesProductos(idProducto,link) values (24,'https://iili.io/mNhxEP.jpg');
+insert into imagenesProductos(idProducto,link) values (24,'https://iili.io/mNhoCB.jpg');
+insert into imagenesProductos(idProducto,link) values (25,'https://iili.io/mNhCQV.jpg');
+insert into imagenesProductos(idProducto,link) values (25,'https://iili.io/mNhqTx.jpg');
+insert into imagenesProductos(idProducto,link) values (25,'https://iili.io/mNhBhQ.jpg');
+insert into imagenesProductos(idProducto,link) values (25,'https://iili.io/mNhKpj.jpg');
+insert into imagenesProductos(idProducto,link) values (26,'https://iili.io/mNhHE7.jpg');
+insert into imagenesProductos(idProducto,link) values (26,'https://iili.io/mNhJ49.jpg');
+insert into imagenesProductos(idProducto,link) values (26,'https://iili.io/mNh3Yu.jpg');
+insert into imagenesProductos(idProducto,link) values (26,'https://iili.io/mNhFkb.jpg');
+
+
+
+create table talle(idproducto int, talle int, stock int default 0,foreign key(idproducto) references productos(id)); 
+
+insert into talle(idproducto,talle,stock) values (1,36,20),(1,37,20),(1,38,30),(1,39,20),(1,40,5),(1,41,3),(1,42,2),(1,43,3),(1,44,2),(1,45,4);
+insert into talle(idproducto,talle,stock) values (2,36,1),(2,37,1),(2,38,1),(2,39,1),(2,40,1),(2,41,1),(2,42,1),(2,43,1),(2,44,1),(2,45,1);
+insert into talle(idproducto,talle,stock) values (3,36,1),(3,37,1),(3,38,1),(3,39,1),(3,40,1),(3,41,1),(3,42,1),(3,43,1),(3,44,1),(3,45,1);
+insert into talle(idproducto,talle,stock) values (4,36,1),(4,37,1),(4,38,1),(4,39,1),(4,40,1),(4,41,1),(4,42,1),(4,43,1),(4,44,1),(4,45,1);
+insert into talle(idproducto,talle,stock) values (5,36,1),(5,37,1),(5,38,1),(5,39,1),(5,40,1),(5,41,1),(5,42,1),(5,43,1),(5,44,1),(5,45,1);
+insert into talle(idproducto,talle,stock) values (6,36,1),(6,37,1),(6,38,1),(6,39,1),(6,40,1),(6,41,1),(6,42,1),(6,43,1),(6,44,1),(6,45,1);
+insert into talle(idproducto,talle,stock) values (7,36,1),(7,37,1),(7,38,1),(7,39,1),(7,40,1),(7,41,1),(7,42,1),(7,43,1),(7,44,1),(7,45,1);
+insert into talle(idproducto,talle,stock) values (8,36,1),(8,37,1),(8,38,1),(8,39,1),(8,40,1),(8,41,1),(8,42,1),(8,43,1),(8,44,1),(8,45,1);
+insert into talle(idproducto,talle,stock) values (9,36,1),(9,37,1),(9,38,1),(9,39,1),(9,40,1),(9,41,1),(9,42,1),(9,43,1),(9,44,1),(9,45,1);
+insert into talle(idproducto,talle,stock) values (10,36,1),(10,37,1),(10,38,1),(10,39,1),(10,40,1),(10,41,1),(10,42,1),(10,43,1),(10,44,1),(10,45,1);
+insert into talle(idproducto,talle,stock) values (11,36,1),(11,37,1),(11,38,1),(11,39,1),(11,40,1),(11,41,1),(11,42,1),(11,43,1),(11,44,1),(11,45,1);
+insert into talle(idproducto,talle,stock) values (12,36,1),(12,37,1),(12,38,1),(12,39,1),(12,40,1),(12,41,1),(12,42,1),(12,43,1),(12,44,1),(12,45,1);
+insert into talle(idproducto,talle,stock) values (13,36,1),(13,37,1),(13,38,1),(13,39,1),(13,40,1),(13,41,1),(13,42,1),(13,43,1),(13,44,1),(13,45,1);
+insert into talle(idproducto,talle,stock) values (14,36,1),(14,37,1),(14,38,1),(14,39,1),(14,40,1),(14,41,1),(14,42,1),(14,43,1),(14,44,1),(14,45,1);
+insert into talle(idproducto,talle,stock) values (15,36,1),(15,37,1),(15,38,1),(15,39,1),(15,40,1),(15,41,1),(15,42,1),(15,43,1),(15,44,1),(15,45,1);
+insert into talle(idproducto,talle,stock) values (16,36,1),(16,37,1),(16,38,1),(16,39,1),(16,40,1),(16,41,1),(16,42,1),(16,43,1),(16,44,1),(16,45,1);
+insert into talle(idproducto,talle,stock) values (17,36,1),(17,37,1),(17,38,1),(17,39,1),(17,40,1),(17,41,1),(17,42,1),(17,43,1),(17,44,1),(17,45,1);
+insert into talle(idproducto,talle,stock) values (18,39,1),(18,40,1),(18,41,1),(18,42,1),(18,43,1),(18,44,1),(18,45,1);
+insert into talle(idproducto,talle,stock) values (19,36,1),(19,37,1),(19,38,1),(19,39,1),(19,40,1),(19,41,1),(19,42,1),(19,43,1);
+insert into talle(idproducto,talle,stock) values (20,36,1),(20,37,1),(20,38,1),(20,39,1),(20,42,1),(20,43,1),(20,44,1),(20,45,1);
+insert into talle(idproducto,talle,stock) values (21,45,1);
+insert into talle(idproducto,talle,stock) values (22,39,1),(22,40,1),(22,41,1),(22,42,1),(22,43,1),(22,44,1);
+insert into talle(idproducto,talle,stock) values (23,42,1),(23,43,1),(23,44,1),(23,45,1);
+insert into talle(idproducto,talle,stock) values (24,41,1),(24,42,1),(24,43,1),(24,44,1),(24,45,1);
+insert into talle(idproducto,talle,stock) values (25,36,1),(25,37,1),(25,38,1),(25,39,1),(25,40,1);
+insert into talle(idproducto,talle,stock) values (26,36,1),(26,37,1),(26,38,1),(26,39,1),(26,40,1);
+
+
+
+
+
+CREATE TABLE usuario (
+    id varchar(250),
+    nombre varchar(60),
+    apellido varchar(60),
+	email varchar(60),
+    direccion  varchar(60));
+    
+
+create table resumen(id int AUTO_INCREMENT PRIMARY KEY, idCompra int, idproducto int, cliente varchar(50), foreign key (idproducto) references productos(id));
