@@ -78,6 +78,41 @@ module.exports = (app) => {
         res.send(pruchaseFinished);
     });
 
+
+
+    app.get('/productos/getShoesForMarcas', (req, res) =>{
+        let productsForMarca = productosServices.getShoesForMarcas(req.params.id);
+
+        res.send(productForMarca);
+    });
+
+    app.get('/productos/getShoesForColors', (req, res) =>{
+        let productsForColors = productosServices.getShoesForColors(req.params.id);
+
+        res.send(productsForColors);
+    });
+
+
+    app.get('/productos/getShoesForTalles', (req, res) =>{
+        let productsForTalles = productosServices.getShoesForTalles(req.params.id);
+
+        res.send(productsForTalles);
+    });
+
+
+    app.get('/productos/getShoesForTypes', (req, res) =>{
+        let productsForTypes = productosServices.getShoesForTypes(req.params.id);
+
+        res.send(productsForTypes);
+    });
+
+
+    app.get('/productos/getShoesForMaterials', (req, res) =>{
+        let productsForMaterials = productosServices.getShoesForMaterials(req.params.id);
+
+        res.send(productsForMaterials);
+    });
+
     /*app.post('/productos/create', (req, res) => {
 
         let producto = req.body;

@@ -78,7 +78,27 @@ const getImage = (idProducto) =>{
 }
 
 
+const getShoesForMarcas =(idMarca) =>{
+    return getShoesForMarca(idMarca);
+}
 
+const getShoesForMaterials = (idMaterial) =>{
+    return getShoesForMaterial(idMaterial);
+}
+
+
+const getShoesForTypes = (idTipo) =>{
+    return getShoesForType(idTipo);
+}
+
+
+const getShoesForTalles = (idTalle) => {
+    return getShoesForTalle(idTalle);
+}
+
+const getShoesForColors = (idColor) =>{
+    return getShoesForColor(idColor);
+}
 
 var mysql = require('mysql');
 var connection = mysql.createConnection({
@@ -104,16 +124,16 @@ getAllShoes = () =>{
     var query = connection.query(
         'SELECT Z.nombre, Z.precio, Z.ano,Z.oferta,Z.disponible,Z.ecologica.Z.fechaCarga,Z.descripcion,'+ 
         'T.tipo, M.marca, C.color, MA.material'+
-        'FROM Zapatilla AS Z '+
-        'JOIN Tipo AS T ON Z.tipo = T.id'+
-        'JOIN Marca AS M ON Z.marca = M.id'+ 
-        'JOIN Color AS C ON Z.color = C.id'+
-        'JOIN Material AS MA ON Z.material = MA.id', [], 
+        ' FROM Productos AS Z '+
+        ' JOIN Tipo AS T ON Z.tipo = T.id'+
+        ' JOIN Marca AS M ON Z.marca = M.id'+ 
+        ' JOIN Color AS C ON Z.color = C.id'+
+        ' JOIN Material AS MA ON Z.material = MA.id', [], 
         function(error, result){
            if(error){
                throw error;
            }else{
-               console.log(result);
+               return result;
            }
        }
     );
@@ -127,7 +147,7 @@ getAllTallesById = (id) =>{
            if(error){
                throw error;
            }else{
-               console.log(result);
+               return result;
            }
        }
     );
@@ -141,7 +161,7 @@ getAllMarcas = () =>{
            if(error){
                throw error;
            }else{
-               console.log(result);
+               return result;
            }
        }
     );
@@ -154,7 +174,7 @@ getAllMaterials =()=>{
            if(error){
                throw error;
            }else{
-               console.log(result);
+               return result;
            }
        }
     );
@@ -168,7 +188,7 @@ getAllColors =()=>{
            if(error){
                throw error;
            }else{
-               console.log(result);
+               return result;
            }
        }
     );
@@ -178,17 +198,17 @@ getShoeById = (id) =>{
     var query = connection.query(
         'SELECT Z.nombre, Z.precio, Z.ano,Z.oferta,Z.disponible,Z.ecologica.Z.fechaCarga,Z.descripcion,'+ 
         'T.tipo, M.marca, C.color, MA.material'+
-        'FROM Zapatilla AS Z '+
-        'JOIN Tipo AS T ON Z.tipo = T.id'+
-        'JOIN Marca AS M ON Z.marca = M.id'+ 
-        'JOIN Color AS C ON Z.color = C.id'+
-        'JOIN Material AS MA ON Z.material = MA.id'+
-        'WHERE id = ?', [id], 
+        ' FROM Productos AS Z '+
+        ' JOIN Tipo AS T ON Z.tipo = T.id'+
+        ' JOIN Marca AS M ON Z.marca = M.id'+ 
+        ' JOIN Color AS C ON Z.color = C.id'+
+        ' JOIN Material AS MA ON Z.material = MA.id'+
+        ' WHERE id = ?', [id], 
         function(error, result){
            if(error){
                throw error;
            }else{
-               console.log(result);
+               return result;
            }
        }
     );
@@ -199,22 +219,22 @@ getShoesFiltered = (filter) =>{
     var query = connection.query(
         'SELECT Z.nombre, Z.precio, Z.ano,Z.oferta,Z.disponible,Z.ecologica.Z.fechaCarga,Z.descripcion,'+ 
         'T.tipo, M.marca, C.color, MA.material'+
-        'FROM Zapatilla AS Z '+
-        'JOIN Tipo AS T ON Z.tipo = T.id'+
-        'JOIN Marca AS M ON Z.marca = M.id'+ 
-        'JOIN Color AS C ON Z.color = C.id'+
-        'JOIN Material AS MA ON Z.material = MA.id'+
-        'WHERE Z.nombre LIKE %?%'+
-        'OR Z.precio = ?'+
-        'OR T.tipo LIKE %?%'+
-        'OR M.marca LIKE %?%'+
-        'OR C.color LIKE %?%'+
-        'OR MA.material LIKE %?%', [filter], 
+        ' FROM Productos AS Z '+
+        ' JOIN Tipo AS T ON Z.tipo = T.id'+
+        ' JOIN Marca AS M ON Z.marca = M.id'+ 
+        ' JOIN Color AS C ON Z.color = C.id'+
+        ' JOIN Material AS MA ON Z.material = MA.id'+
+        ' WHERE Z.nombre LIKE %?%'+
+        ' OR Z.precio = ?'+
+        ' OR T.tipo LIKE %?%'+
+        ' OR M.marca LIKE %?%'+
+        ' OR C.color LIKE %?%'+
+        ' OR MA.material LIKE %?%', [filter], 
         function(error, result){
            if(error){
                throw error;
            }else{
-               console.log(result);
+               return result;
            }
        }
     );
@@ -235,7 +255,7 @@ getShoesOnSale = () =>{
            if(error){
                throw error;
            }else{
-               console.log(result);
+               return result;
            }
        }
     );
@@ -251,7 +271,7 @@ addPurchase = (idCompra,idZapatilla,cliente) =>{
            if(error){
                throw error;
            }else{
-               console.log(result);
+               return result;
            }
        }
     );
@@ -265,45 +285,118 @@ getImageForProduct = (idProducto) =>{
            if(error){
                throw error;
            }else{
-               console.log(result);
-           }
-       }
-    );
-}
-
-/*
-getShoesOnSale = () =>{
-    var query = connection.query(
-        '', [], 
-        function(error, result){
-           if(error){
-               throw error;
-           }else{
-               console.log(result);
+               return result;
            }
        }
     );
 }
 
 
-getShoesOnSale = () =>{
+getShoesForMarca = (idMarca) =>{
     var query = connection.query(
-        '', [], 
+        'SELECT Z.nombre, Z.precio, Z.ano,Z.oferta,Z.disponible,Z.ecologica,Z.fechaCarga,Z.descripcion,'+ 
+        ' T.tipo, M.marca, C.color, MA.material'+
+        ' FROM Productos AS Z '+
+        ' JOIN Tipo AS T ON Z.tipo = T.id'+
+        ' JOIN Marca AS M ON Z.marca = M.id'+ 
+        ' JOIN Color AS C ON Z.color = C.id'+
+        ' JOIN Material AS MA ON Z.material = MA.id'+
+        ' WHERE Z.Marca = ? ', [idMarca], 
         function(error, result){
            if(error){
                throw error;
            }else{
-               console.log(result);
+               return result;
            }
        }
     );
-}*/
+}
+
+
+getShoesForType = (idTipo) =>{
+    var query = connection.query(
+        'SELECT Z.nombre, Z.precio, Z.ano,Z.oferta,Z.disponible,Z.ecologica,Z.fechaCarga,Z.descripcion,'+ 
+        ' T.tipo, M.marca, C.color, MA.material'+
+        ' FROM Productos AS Z '+
+        ' JOIN Tipo AS T ON Z.tipo = T.id'+
+        ' JOIN Marca AS M ON Z.marca = M.id'+ 
+        ' JOIN Color AS C ON Z.color = C.id'+
+        ' JOIN Material AS MA ON Z.material = MA.id'+
+        ' WHERE Z.Tipo = ?', [idTipo],
+        function(error, result){
+           if(error){
+               throw error;
+           }else{
+               return result;
+           }
+       }
+    );
+}
+
+
+getShoesForMaterial = (idMaterial) =>{
+    var query = connection.query(
+        'SELECT Z.nombre, Z.precio, Z.ano,Z.oferta,Z.disponible,Z.ecologica,Z.fechaCarga,Z.descripcion,'+ 
+        ' T.tipo, M.marca, C.color, MA.material'+
+        ' FROM Productos AS Z '+
+        ' JOIN Tipo AS T ON Z.tipo = T.id'+
+        ' JOIN Marca AS M ON Z.marca = M.id'+ 
+        ' JOIN Color AS C ON Z.color = C.id'+
+        ' JOIN Material AS MA ON Z.material = MA.id'+
+        ' WHERE Z.Material = ?', [idMaterial],
+        function(error, result){
+           if(error){
+               throw error;
+           }else{
+               return result;
+           }
+       }
+    );
+}
 
 
 
+getShoesForTalle = (idTalle) =>{
+    var query = connection.query(
+        'SELECT Z.nombre, Z.precio, Z.ano,Z.oferta,Z.disponible,Z.ecologica,Z.fechaCarga,Z.descripcion,'+ 
+        ' T.tipo, M.marca, C.color, MA.material'+
+        ' FROM Productos AS Z '+
+        ' JOIN Tipo AS T ON Z.tipo = T.id'+
+        ' JOIN Marca AS M ON Z.marca = M.id'+ 
+        ' JOIN Color AS C ON Z.color = C.id'+
+        ' JOIN Material AS MA ON Z.material = MA.id'+
+        ' WHERE Z.Talle = ?', [idTalle],
+        function(error, result){
+           if(error){
+               throw error;
+           }else{
+               return result;
+           }
+       }
+    );
+}
 
 
+getShoesForColor = (idColor) =>{
+    var query = connection.query(
+        'SELECT Z.nombre, Z.precio, Z.ano,Z.oferta,Z.disponible,Z.ecologica,Z.fechaCarga,Z.descripcion,'+ 
+        ' T.tipo, M.marca, C.color, MA.material'+
+        ' FROM Productos AS Z '+
+        ' JOIN Tipo AS T ON Z.tipo = T.id'+
+        ' JOIN Marca AS M ON Z.marca = M.id'+ 
+        ' JOIN Color AS C ON Z.color = C.id'+
+        ' JOIN Material AS MA ON Z.material = MA.id'+
+        ' WHERE Z.Color = ?', [idColor],
+        function(error, result){
+           if(error){
+               throw error;
+           }else{
+               return result;
+           }
+       }
+    );
+}
 
-module.exports = { getAll, getById,getMaterials,getColors ,getMarcas,getTipos,getOnSale,finishPurchase,getImage}
+module.exports = { getAll, getById,getMaterials,getColors ,getMarcas,getTipos,getOnSale,finishPurchase,getImage,getShoesForMarcas,getShoesForTypes,getShoesForMaterials,getShoesForTalles, getShoesForColors}
 
 //connection.end();
