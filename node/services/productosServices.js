@@ -131,9 +131,10 @@ getAllShoes = () =>{
         ' JOIN Material AS MA ON Z.material = MA.id', [], 
         function(error, result){
            if(error){
-               throw error;
+                throw error;
            }else{
-               return result;
+                console.log(result);
+                return result;
            }
        }
     );
@@ -145,9 +146,10 @@ getAllTallesById = (id) =>{
         'SELECT * FROM Talle WHERE idproducto = ?', [id], 
         function(error, result){
            if(error){
-               throw error;
+                throw error;
            }else{
-               return result;
+                console.log(result);
+                return result;
            }
        }
     );
@@ -159,9 +161,10 @@ getAllMarcas = () =>{
         'SELECT * FROM Marca', [], 
         function(error, result){
            if(error){
-               throw error;
+                throw error;
            }else{
-               return result;
+                console.log(result);
+                return result;
            }
        }
     );
@@ -172,9 +175,10 @@ getAllMaterials =()=>{
         'SELECT * FROM Material', [], 
         function(error, result){
            if(error){
-               throw error;
+                throw error;
            }else{
-               return result;
+                console.log(result);
+                return result;
            }
        }
     );
@@ -186,9 +190,10 @@ getAllColors =()=>{
         'SELECT * FROM Color', [], 
         function(error, result){
            if(error){
-               throw error;
+                throw error;
            }else{
-               return result;
+                console.log(result);
+                return result;
            }
        }
     );
@@ -206,9 +211,10 @@ getShoeById = (id) =>{
         ' WHERE id = ?', [id], 
         function(error, result){
            if(error){
-               throw error;
+                throw error;
            }else{
-               return result;
+                console.log(result);
+                return result;
            }
        }
     );
@@ -232,9 +238,10 @@ getShoesFiltered = (filter) =>{
         ' OR MA.material LIKE %?%', [filter], 
         function(error, result){
            if(error){
-               throw error;
+                throw error;
            }else{
-               return result;
+                console.log(result);
+                return result;
            }
        }
     );
@@ -255,7 +262,8 @@ getShoesOnSale = () =>{
            if(error){
                throw error;
            }else{
-               return result;
+                console.log(result);
+                return result;
            }
        }
     );
@@ -271,7 +279,8 @@ addPurchase = (idCompra,idZapatilla,cliente) =>{
            if(error){
                throw error;
            }else{
-               return result;
+                console.log(result);
+                return result;
            }
        }
     );
@@ -285,7 +294,8 @@ getImageForProduct = (idProducto) =>{
            if(error){
                throw error;
            }else{
-               return result;
+                console.log(result);
+                return result;
            }
        }
     );
@@ -306,7 +316,8 @@ getShoesForMarca = (idMarca) =>{
            if(error){
                throw error;
            }else{
-               return result;
+                console.log(result);
+                return result;
            }
        }
     );
@@ -325,9 +336,10 @@ getShoesForType = (idTipo) =>{
         ' WHERE Z.Tipo = ?', [idTipo],
         function(error, result){
            if(error){
-               throw error;
+                throw error;
            }else{
-               return result;
+                console.log(result);
+                return result;
            }
        }
     );
@@ -346,8 +358,9 @@ getShoesForMaterial = (idMaterial) =>{
         ' WHERE Z.Material = ?', [idMaterial],
         function(error, result){
            if(error){
-               throw error;
+                throw error;
            }else{
+                console.log(result);
                return result;
            }
        }
@@ -368,9 +381,10 @@ getShoesForTalle = (idTalle) =>{
         ' WHERE Z.Talle = ?', [idTalle],
         function(error, result){
            if(error){
-               throw error;
+                throw error;
            }else{
-               return result;
+                console.log(result);
+                return result;
            }
        }
     );
@@ -389,9 +403,10 @@ getShoesForColor = (idColor) =>{
         ' WHERE Z.Color = ?', [idColor],
         function(error, result){
            if(error){
-               throw error;
+                throw error;
            }else{
-               return result;
+                console.log(result);
+                return result;
            }
        }
     );

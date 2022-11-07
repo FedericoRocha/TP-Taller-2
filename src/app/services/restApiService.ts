@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Zapatilla } from '../interfaces/zapatilla';
+import { ListBucketAnalyticsConfigurationsCommand } from '@aws-sdk/client-s3';
 
 
 //Decorador que marca una clase como disponible para ser proporcionada e inyectada como dependencia//
@@ -43,8 +45,8 @@ export class RestApiService {
         return this.http.post<any>(this.apiURL + '/productos/createProducto', producto, this.httpOptions);
     }
     
-    ZapatillaOferta(){
-        return this.http.get<any>(this.apiURL + '/productos/getOnSale',  this.httpOptions);
+    ZapatillaOferta(): Observable<Zapatilla[]>{
+        return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getOnSale', this.httpOptions);
     }
 
 }

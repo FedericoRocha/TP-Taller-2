@@ -26,9 +26,10 @@ irAProductoDescripcion(zapatilla: Zapatilla){
   }
 
   cargarZapatilla(){
-    this.restApiService.ZapatillaOferta().subscribe(data => this.zapatillas = data); 
+    this.restApiService.ZapatillaOferta().pipe().subscribe(data =>
+      this.zapatillas =data);
     console.log(this.zapatillas);
-  }
+  }; 
 }
 
 
