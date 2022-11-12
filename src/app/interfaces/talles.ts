@@ -1,4 +1,4 @@
 export interface Talles {
-    numero:number,
+    talle:number,
     stock:number,
 }

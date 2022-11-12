@@ -1,44 +1,42 @@
 <app-navbar></app-navbar>
-<p class="fs-2">{{zapatilla.nombre}}</p>
+
+
 <div class="container col-xxl-8 px-4 py-5">
 
   <div class="row flex-lg-row align-items-center g-5 py-5">
     <div class="col-10 col-sm-8 col-lg-6">
       <img [src]=zapatillaDescripcion.imagen1 class="card-img-top">
     </div>
-    <p class="fs-2">{{zapatilla.nombre}}</p>
-    <div class="col-lg-6" *ngIf="zapatillaDescripcion">
-      <p class="fs-2">{{zapatillaDescripcion.nombre}}</p>
+    <div class="col-lg-6" *ngFor="let zapatilla of zapatillas">
+      <p class="fs-2">{{zapatilla.nombre}}</p>
       <p class="fs-3">Envio Gratis</p>
-      <p class="fs-3">{{zapatillaDescripcion.precio}} </p>
+      <p class="fs-3">${{zapatilla.precio}} </p>
       <p class="fs-3">
 
         <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" [(ngModel)]="talle">
            <option disabled selected value="undefined">Sleccionar un talle</option>
-            <option [value]="talle.numero" *ngFor="let talle of talles ">{{talle.numero}} </option>         
+            <option [value]="talle.talle" *ngFor="let talle of talles ">{{talle.talle}} </option>         
         </select>
 
       </p>
 
       <p><button type="button" class="btn btn-outline-success" (click)="agregarCarrito(zapatillaDescripcion)">Agregar al carrito</button></p>
-    </div>
-  </div>
-  <div class="row flex-lg-row align-items-center g-5 py-5">
-    <h3>DESCRIPCIÓN DEL PRODUCTO</h3>
-    <ul class="list-group-border-color:white">
-      <li class="list-group-item">• Construida sobre una base de alto rendimiento para brindar máxima sujeción y
-        comodidad.</li>
-      <li class="list-group-item">• Con una suela exterior duradera que proporciona un agarre prolongado en superficies
-        mojadas.</li>
-      <li class="list-group-item">• Un antepié más ancho proporciona el ajuste cómodo que necesita para recorridos más
-        largos.</li>
-    </ul>
-    <h3>Especificaciones</h3>
-    <ul class="list-group-border-color:white">
-      <li class="list-group-item">Disciplina: {{zapatillaDescripcion.disciplina}}</li>
-      <li class="list-group-item">Material: {{zapatillaDescripcion.material}}</li>
-    </ul>
 
+
+      <div class="row flex-lg-row align-items-center g-5 py-5">
+        <h3>DESCRIPCIÓN DEL PRODUCTO</h3>
+        <ul class="list-group-border-color:white">
+          <li class="list-group-item">{{zapatilla.descripcion}}</li>
+        </ul>
+        <h3>Especificaciones</h3>
+        <ul class="list-group-border-color:white">
+          <li class="list-group-item">Disciplina: {{zapatilla.tipo}}</li>
+          <li class="list-group-item">Material: {{zapatilla.material}}</li>
+        </ul>
+    
+      </div>
+
+    </div>
   </div>
 </div>
 <app-footer></app-footer>

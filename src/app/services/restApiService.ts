@@ -47,10 +47,12 @@ export class RestApiService {
         return this.http.post<any>(this.apiURL + '/productos/createProducto', producto, this.httpOptions);
     }
 
-    ZapatillaporId(idproducto:number): Observable<Zapatilla>{
-       return this.http.get<Zapatilla>(this.apiURL + '/productos/getZapatillaporId/'+idproducto,this.httpOptions);
+    ZapatillaporId(idproducto:number): Observable<Zapatilla[]>{
+       return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getZapatillaporId/'+idproducto,this.httpOptions);
     }
-        ZapatillaOferta(): Observable<Zapatilla[]>{
+
+
+    ZapatillaOferta(): Observable<Zapatilla[]>{
         return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getOnSale', this.httpOptions);
     }
 

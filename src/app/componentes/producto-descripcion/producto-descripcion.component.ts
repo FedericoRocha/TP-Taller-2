@@ -41,7 +41,7 @@ export class ProductoDescripcionComponent implements OnInit {
     material:"SINTETICO",
     descripcionProducto:"• Construida sobre una base de alto rendimiento para brindar máxima sujeción y comodidad. Con una suela exterior duradera que proporciona un agarre prolongado en superficies mojadas Un antepié más ancho proporciona el ajuste cómodo que necesita para recorridos más largos.",
   }
-zapatilla:Zapatilla;
+zapatillas:Zapatilla [] = [];
 
   
   talles:Talles[]=[] ;
@@ -62,7 +62,7 @@ zapatilla:Zapatilla;
 
     let talles2 = {} as Talles;
     for(var i=0; i<this.talles.length;i++){
-      if(this.talles[i].numero==this.talle){
+      if(this.talles[i].talle==this.talle){
         talles2=this.talles[i];
       }
     }
@@ -74,11 +74,11 @@ zapatilla:Zapatilla;
     zapatillaCarrito.color=zapatillaDescripcion.color;
     zapatillaCarrito.marca=zapatillaDescripcion.marca;  
 
-    zapatillaCarrito.talle=talles2.numero;
+    zapatillaCarrito.talle=talles2.talle;
     zapatillaCarrito.stock=talles2.stock;
     zapatillaCarrito.cantidad=1;
 // formo una key compuesta para poder usarla en el local storage
-    zapatillaCarrito.key=zapatillaDescripcion.id+"-"+talles2.numero;
+    zapatillaCarrito.key=zapatillaDescripcion.id+"-"+talles2.talle;
     this.cartService.addToCart(zapatillaCarrito);
     window.alert('Your product has been added to the cart!');
   }
@@ -86,15 +86,14 @@ zapatilla:Zapatilla;
   ngOnInit(): void {    
     let idproducto=this.route.snapshot.paramMap.get('id');  
     this.cargarZapatillaporID(idproducto); 
-    this.zapatilla.nombre='asdasd';
    // this.CargarImagenesporId(idproducto); 
-    //this.cargarTallesporId(idproducto); 
+    this.cargarTallesporId(idproducto); 
 
     }
     cargarZapatillaporID(idproducto){
-      this.restApiService.ZapatillaporId(idproducto).pipe().subscribe(data => this.zapatilla=data);
+      this.restApiService.ZapatillaporId(idproducto).pipe().subscribe(data => this.zapatillas=data);
      
-        console.log(this.zapatilla);
+        console.log(this.zapatillas);
     } 
    /* CargarImagenesporId(idproducto){
       this.restApiService.ImagenesporId(idproducto).pipe().subscribe(data =>
