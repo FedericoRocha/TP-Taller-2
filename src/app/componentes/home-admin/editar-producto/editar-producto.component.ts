@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { productos } from 'src/app/productos';
+//import { productos } from 'src/app/productos';
 import { AdminService } from 'src/app/services/admin.service';
 
 @Component({
@@ -11,7 +11,7 @@ import { AdminService } from 'src/app/services/admin.service';
 })
 export class EditarProductoComponent implements OnInit {
 
-  producto = productos;
+ // producto = productos;
   checkoutForm;
 
   constructor(private route: ActivatedRoute, private form: FormBuilder, private admin:AdminService) { 
@@ -30,7 +30,7 @@ export class EditarProductoComponent implements OnInit {
 
   onSubmit(data) {
     // Process checkout data here
-    this.admin.editar(data);
+    //this.admin.editar(data);
     console.warn('Your order has been submitted', data);
   }
 

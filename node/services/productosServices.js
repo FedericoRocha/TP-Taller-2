@@ -13,7 +13,7 @@ const getAll = (valorBusqueda) => {
     }
 }
 
-const getById = (id) => {
+const getZapatillaporId = (id) => {
     return getShoeById(id);
 }
 
@@ -412,6 +412,6 @@ getShoesForColor = (idColor) =>{
     );
 }
 
-module.exports = { getAll, getById,getMaterials,getColors ,getMarcas,getTipos,getOnSale,finishPurchase,getImage,getShoesForMarcas,getShoesForTypes,getShoesForMaterials,getShoesForTalles, getShoesForColors}
+module.exports = { getAll, getZapatillaporId,getMaterials,getColors ,getMarcas,getTipos,getOnSale,finishPurchase,getImage,getShoesForMarcas,getShoesForTypes,getShoesForMaterials,getShoesForTalles, getShoesForColors}
 
 //connection.end();

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { productos } from 'src/app/productos';
+//import { productos } from 'src/app/productos';
 import { AdminService } from '../../services/admin.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { AdminService } from '../../services/admin.service';
 })
 export class HomeAdminComponent implements OnInit {
 
-  producto = productos;
+//  producto = productos;
 
   constructor(private route: ActivatedRoute, private admin:AdminService) { }
 
@@ -19,7 +19,7 @@ export class HomeAdminComponent implements OnInit {
 
   eliminar(id){
     if(confirm('¿Seguro Desea Eliminar?')){
-      this.admin.eliminar(id);
+    //  this.admin.eliminar(id);
       // const resultado= this.items.findIndex(e=>e.id==id);
       // this.items.splice(resultado,1);
       // return this.items;

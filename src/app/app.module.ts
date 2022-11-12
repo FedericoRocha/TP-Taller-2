@@ -37,7 +37,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'crearcuenta', component: CrearcuentaComponent },
   // producto tiene que ser un modelo no una pagina, no tengo idea de como redireccionarla para que se cargen los datos dle producto seleccionado
-  { path: 'productoDescripcion', component: ProductoDescripcionComponent }, 
+  { path: 'productoDescripcion/:id', component: ProductoDescripcionComponent }, 
   { path: 'carrito', component: CarritoComponent }, 
   { path: 'perfil', component: PerfilComponent },  
   { path: 'buscar-zapatilla', component: BuscarZapatillaComponent },

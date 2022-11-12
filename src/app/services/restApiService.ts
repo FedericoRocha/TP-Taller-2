@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Zapatilla } from '../interfaces/zapatilla';
 import { ListBucketAnalyticsConfigurationsCommand } from '@aws-sdk/client-s3';
+import { Talles } from '../interfaces/talles';
+import { Imagenes } from '../interfaces/imagenes';
 
 
 //Decorador que marca una clase como disponible para ser proporcionada e inyectada como dependencia//
@@ -44,9 +46,21 @@ export class RestApiService {
         console.log(producto);
         return this.http.post<any>(this.apiURL + '/productos/createProducto', producto, this.httpOptions);
     }
-    
-    ZapatillaOferta(): Observable<Zapatilla[]>{
+
+    ZapatillaporId(idproducto:number): Observable<Zapatilla>{
+       return this.http.get<Zapatilla>(this.apiURL + '/productos/getZapatillaporId/'+idproducto,this.httpOptions);
+    }
+        ZapatillaOferta(): Observable<Zapatilla[]>{
         return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getOnSale', this.httpOptions);
     }
 
+
+
+    /*ImagenesporId(idproducto:number): Observable<Imagenes[]>{
+       // return this.http.get<Imagenes[]>(this.apiURL + '/productos/getImagenesporId',idproducto, this.httpOptions);
+    }*/
+    TallesporId(idproducto:number): Observable<Talles[]>{
+       return this.http.get<Talles[]>(this.apiURL + '/productos/getTallesporId/'+idproducto,this.httpOptions);
+    }
+    
 }

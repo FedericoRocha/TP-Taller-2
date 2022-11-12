@@ -1,6 +1,26 @@
 //se importa el archivo productoServices
 const productosServices = require('../services/productosServices');
 
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'grip',
+    password: 'admin',
+    database: 'taller2',
+    port: 3306
+ });
+
+
+ connection.connect(function(error){
+    if(error){
+       throw error;
+    }else{
+       console.log('Conexion correcta.');
+    }
+ });
+
+
+
 //a este modulo lo va a llamar el index y le va a pasar express
 module.exports = (app) => {
     app.get(
@@ -62,11 +82,78 @@ module.exports = (app) => {
     });
 
 
-    app.get('/productos/getOnSale', (req, res) =>{
-        let productsOnSale = productosServices.getOnSale();
 
-        res.send(productsOnSale);
+
+
+
+    app.get('/productos/getOnSale', (req, res) =>{   
+      
+        const sentencia='select * from productos p join imagenesproductos i on p.id = i.idProducto where oferta>0 group by p.id';
+        connection.query(sentencia,(error, resultado)=>{
+             if(error) throw error;
+
+             if(resultado.length>0){
+                 res.json(resultado);
+             }else{
+                res.send('sin resultados');
+             } 
+
+         } )
     });
+
+    /*app.get('/productos/getZapatillaporId/:idproducto', (req, res) =>{   
+        const {idproducto}= req.params
+        const sentencia='SELECT z.id , Z.nombre, Z.precio, Z.ano, z.oferta, Z.disponible, Z.ecologica, z.fechaCarga, Z.descripcion, z.tipo, z.marca, z.color, z.material FROM Productos AS Z  WHERE id ='+idproducto;
+        connection.query(sentencia,(error, resultado)=>{
+             if(error) throw error;
+
+             if(resultado.length>0){
+                 res.json(resultado);
+             }else{
+                res.send('sin resultados');
+
+             } 
+
+         } )
+    });*/
+
+
+    app.get('/productos/getZapatillaporId/:idproducto', (req, res) =>{   
+        let productId=req.params.idproducto;
+        var query = connection.query('SELECT z.id , Z.nombre, Z.precio, Z.ano, z.oferta, Z.disponible, Z.ecologica, z.fechaCarga, Z.descripcion,'+
+            'z.tipo, z.marca, z.color, z.material FROM Productos AS Z  WHERE id = ?', [productId], 
+            function(error, result){
+               if(error){
+                    throw error;
+               }else{
+                    console.log(result);
+                    res.json(result);
+               }
+           }
+        );           
+    });
+    
+
+    app.get('/productos/getTallesporId/:idproducto', (req, res) =>{
+        let productId=req.params.idproducto;
+        var query = connection.query('select talle, stock from talle where idproducto = ?', [productId], 
+            function(error, result){
+               if(error){
+                    throw error;
+               }else{
+                    console.log(result);
+                    res.json(result);
+               }
+           }
+        );           
+    });
+
+
+
+
+
+
+
 
 
     app.put('/productos/finishPurchase' , (req,res) => {
@@ -93,11 +180,7 @@ module.exports = (app) => {
     });
 
 
-    app.get('/productos/getShoesForTalles', (req, res) =>{
-        let productsForTalles = productosServices.getShoesForTalles(req.params.id);
-
-        res.send(productsForTalles);
-    });
+    
 
 
     app.get('/productos/getShoesForTypes', (req, res) =>{

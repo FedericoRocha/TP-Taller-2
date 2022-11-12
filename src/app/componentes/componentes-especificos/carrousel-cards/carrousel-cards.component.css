@@ -44,3 +44,6 @@ img{
   font-size: 55px;
   color: grey;
 }
+a:link, a:visited, a:active {
+  text-decoration:none;
+}

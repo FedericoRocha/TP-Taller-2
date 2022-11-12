@@ -12,7 +12,6 @@ import { RestApiService } from 'src/app/services/restApiService';
 export class CarrouselCardsComponent implements OnInit {
   
   rutaLogo: string="./assets/logo.png";
-  //esto se tiene que cargar desd ela base
   zapatillas: Zapatilla[];
 
 irAProductoDescripcion(zapatilla: Zapatilla){
@@ -28,7 +27,7 @@ irAProductoDescripcion(zapatilla: Zapatilla){
   cargarZapatilla(){
     this.restApiService.ZapatillaOferta().pipe().subscribe(data =>
       this.zapatillas =data);
-    console.log(this.zapatillas);
+    //console.log(this.zapatillas);
   }; 
 }
 

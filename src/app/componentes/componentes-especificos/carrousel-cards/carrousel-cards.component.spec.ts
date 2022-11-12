@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, DoCheck , OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CarrouselCardsComponent } from './carrousel-cards.component';
 

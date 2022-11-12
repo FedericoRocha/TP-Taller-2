@@ -9,27 +9,31 @@
                                 <div class="row">
                                     <!-- busca una lista de producos cargados en el carrousel-cards.componen usa la iterfaz zapatilla-->
                                     <!-- producto es el producto,  zapatillas es el array declarado en carrusel-cards -->
-                                    <ng-container *ngFor="let producto of zapatillas">
-                                         <div class="col-sm-12 col-lg-3">
+                                    <ng-container *ngFor="let producto of zapatillas | slice:0:4">
+                                         
+                                                                               
+                                             <div class="col-sm-12 col-lg-3">   
+                                                <a [routerLink]="['/productoDescripcion',producto.id]" >
+                                                   
+
                                                   <!-- si el producto esta en oferta el borde es verde, revisar el css -->
-                                            <div class="card" [ngClass]="{'oferta': producto.oferta}">
+                                                <div class="card" [ngClass]="{'oferta': producto.oferta}">
                                                 
-                                                <!-- intentar en el alt poner el logo.png asi si no carga la imagen del producto muestra el logo  [alt]="rutaLogo" -->
-                                                <img [src]="producto.imagen1"  class="card-img-top">
+                                                <!-- intentar en el alt poner el logo.png asi si no carga la imagen del producto muestra el logo  [alt]="./assets/logo.png" -->
+                                                <img [src]="producto.link"  [alt]="rutaLogo"  class="card-img-top">
                                                 <div class="card-body">
-                                                    <h5 class="card-title">{{ producto.precio | currency:'ARS'}}</h5>
-                                                    <p class="card-text">{{ producto.nombre }}</p>
+                                                    <p class="card-text">{{ producto.nombre }}</p>   
+                                                    <h5 class="card-title">{{ producto.precio *(0.01*(100-producto.oferta))| currency:'ARS '}}</h5>
+                                                    <h6 class="card-text"> Antes {{ producto.precio | currency:'ARS '}}</h6>                                                
                                                   
                                                     <!-- tendria que buscar el producto.precio y dividirlo por 3 no me salio-->
-                                                    <p class="card-text">3 cuotas de {{producto.precio | percent:'1.1-3'}}}</p>
+                                                    <p class="card-text">3 cuotas de {{producto.precio /3}}</p>
 
-                                                    <p *ngIf="producto.cantidad <30"> Ultimas Unidades</p>
-                                                    <p *ngIf="producto.cantidad ==00"> Sin Stock</p>
-                                                </div>
-                                            </div>
-                                            <!-- se tiene que mandar el producto com zapatilla   producto-descripcion -->
-                                            <a href={{producto.linkcompra}} class="stretched-link"></a>
-                                            </div>    
+                                                     </div>
+                                                     </div>                                                
+                                                 </a> 
+                                            </div>   
+                                        
                                       </ng-container>
             </div>
 

@@ -2,11 +2,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Talles } from 'src/app/interfaces/talles';
+import  {Imagenes}  from 'src/app/interfaces/imagenes';
+import { RestApiService } from 'src/app/services/restApiService';
 
 
 import { ZapatillaDescripcion } from 'src/app/interfaces/zapatillaDescripcion';
 import { CartService } from 'src/app/services/cart.service';
 import { ZapatillaCarrito } from 'src/app/interfaces/zapatillaCarrito';
+import { Zapatilla } from 'src/app/interfaces/zapatilla';
+
 
 @Component({  
   selector: 'app-producto-descripcion',
@@ -15,6 +19,8 @@ import { ZapatillaCarrito } from 'src/app/interfaces/zapatillaCarrito';
 })
 export class ProductoDescripcionComponent implements OnInit {
 
+  idproducto='';
+  rutaLogo: string="./assets/logo.png";
 
 
   // aca tengo un problema, zapattila carrito tiene que ser una convinacion de zapatila descripcion y un valor del talle, nose como mandarlo  
@@ -35,18 +41,21 @@ export class ProductoDescripcionComponent implements OnInit {
     material:"SINTETICO",
     descripcionProducto:"• Construida sobre una base de alto rendimiento para brindar máxima sujeción y comodidad. Con una suela exterior duradera que proporciona un agarre prolongado en superficies mojadas Un antepié más ancho proporciona el ajuste cómodo que necesita para recorridos más largos.",
   }
+zapatilla:Zapatilla;
 
-  talles:Talles[]=[{ numero:35,stock:10 },{ numero:37,stock:1 },{ numero:40,stock:5 }]
-  //esto no tiene que traer talles en 0;
+  
+  talles:Talles[]=[] ;
+  imagenes:Imagenes[]=[];
+
   talle:number;
 
- 
- 
 
   constructor(
-    private route: ActivatedRoute,
+    private route: ActivatedRoute, 
+    private restApiService:RestApiService, 
     private cartService: CartService
   ) { 
+      console.log(this.route.snapshot.paramMap.get('id'))
   }
 
   agregarCarrito(zapatillaDescripcion: ZapatillaDescripcion) {
@@ -57,8 +66,7 @@ export class ProductoDescripcionComponent implements OnInit {
         talles2=this.talles[i];
       }
     }
-    let zapatillaCarrito = {} as ZapatillaCarrito;
-   
+    let zapatillaCarrito = {} as ZapatillaCarrito;   
     zapatillaCarrito.id=zapatillaDescripcion.id;
     zapatillaCarrito.nombre=zapatillaDescripcion.nombre;
     zapatillaCarrito.imagen1=zapatillaDescripcion.imagen1;
@@ -76,6 +84,27 @@ export class ProductoDescripcionComponent implements OnInit {
   }
 
   ngOnInit(): void {    
+    let idproducto=this.route.snapshot.paramMap.get('id');  
+    this.cargarZapatillaporID(idproducto); 
+    this.zapatilla.nombre='asdasd';
+   // this.CargarImagenesporId(idproducto); 
+    //this.cargarTallesporId(idproducto); 
+
+    }
+    cargarZapatillaporID(idproducto){
+      this.restApiService.ZapatillaporId(idproducto).pipe().subscribe(data => this.zapatilla=data);
+     
+        console.log(this.zapatilla);
+    } 
+   /* CargarImagenesporId(idproducto){
+      this.restApiService.ImagenesporId(idproducto).pipe().subscribe(data =>
+        this.imagenes =data);
+
+    }; 
+    */cargarTallesporId(idproducto){
+      this.restApiService.TallesporId(idproducto).pipe().subscribe(data => this.talles =data);
+         }
+
   }
 
-}
+
