@@ -88,7 +88,7 @@ module.exports = (app) => {
 
     app.get('/productos/getOnSale', (req, res) =>{   
       
-        const sentencia='select * from productos p join imagenesproductos i on p.id = i.idProducto where oferta>0 group by p.id';
+        const sentencia='select * from productos p join imagenesproductos i on p.id = i.idProducto where oferta <> 0 group by p.id';
         connection.query(sentencia,(error, resultado)=>{
              if(error) throw error;
 
