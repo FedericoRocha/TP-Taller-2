@@ -4,8 +4,8 @@
 <div class="container col-xxl-8 px-4 py-5">
 
   <div class="row flex-lg-row align-items-center g-5 py-5">
-    <div class="col-10 col-sm-8 col-lg-6">
-      <img [src]=zapatillaDescripcion.imagen1 class="card-img-top">
+    <div class="col-10 col-sm-8 col-lg-6" *ngFor="let imagen of imagenes">
+      <img [src]="imagen.link" class="card-img-top">
     </div>
     <div class="col-lg-6" *ngFor="let zapatilla of zapatillas">
       <p class="fs-2">{{zapatilla.nombre}}</p>

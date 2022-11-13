@@ -47,6 +47,8 @@ module.exports = (app) => {
     });
 
 
+
+    /* PARA REVISAR
     app.get('/productos/getMarcas', (req, res) => {
         let marca = productosServices.getMarcas();
 
@@ -72,57 +74,55 @@ module.exports = (app) => {
         let colors = productosServices.getColors();
 
         res.send(colors);
-    });
-
-
-    app.get('/productos/getImage', (req, res) =>{
-        let image = productosServices.getImage();
-
-        res.send(image);
-    });
-
-
-
-
-
-
-    app.get('/productos/getOnSale', (req, res) =>{   
-      
-        const sentencia='select * from productos p join imagenesproductos i on p.id = i.idProducto where oferta <> 0 group by p.id';
-        connection.query(sentencia,(error, resultado)=>{
-             if(error) throw error;
-
-             if(resultado.length>0){
-                 res.json(resultado);
-             }else{
-                res.send('sin resultados');
-             } 
-
-         } )
-    });
-
-    /*app.get('/productos/getZapatillaporId/:idproducto', (req, res) =>{   
-        const {idproducto}= req.params
-        const sentencia='SELECT z.id , Z.nombre, Z.precio, Z.ano, z.oferta, Z.disponible, Z.ecologica, z.fechaCarga, Z.descripcion, z.tipo, z.marca, z.color, z.material FROM Productos AS Z  WHERE id ='+idproducto;
-        connection.query(sentencia,(error, resultado)=>{
-             if(error) throw error;
-
-             if(resultado.length>0){
-                 res.json(resultado);
-             }else{
-                res.send('sin resultados');
-
-             } 
-
-         } )
     });*/
+
+
+    app.get('/productos/getImagenesPorId/:idproducto', (req, res) =>{
+        let productId=req.params.idproducto;
+        var query = connection.query('SELECT * FROM imagenesproductos AS I where idProducto = ? GROUP BY I.idProducto ', [productId], 
+            function(error, result){
+               if(error){
+                    throw error;
+               }else{
+                    console.log(result);
+                    res.json(result);
+               }
+           }
+        );    
+    });
+    
+
+
+    app.get('/productos/getOnSale', (req, res) =>{  
+        var query = connection.query('SELECT P.id , P.nombre, P.precio, P.ano, P.oferta, P.disponible, P.ecologica, P.fechaCarga, P.descripcion,'+
+            'P.tipo, P.marca, P.color, P.material, I.link'+
+            ' FROM Productos AS P'+
+            ' JOIN imagenesproductos AS I'+
+            ' ON P.id = I.idProducto'+
+            ' WHERE P.oferta > 0'+
+            ' GROUP BY P.id', [],
+        function(error, result){
+            if(error){
+                 throw error;
+            }else{
+                 console.log(result);
+                 res.json(result);
+            }
+        }
+     );           
+    });    
+
 
 
     app.get('/productos/getZapatillaporId/:idproducto', (req, res) =>{   
         let productId=req.params.idproducto;
-        var query = connection.query('SELECT z.id , Z.nombre, Z.precio, Z.ano, z.oferta, Z.disponible, Z.ecologica, z.fechaCarga, Z.descripcion,'+
-            'z.tipo, z.marca, z.color, z.material FROM Productos AS Z  WHERE id = ?', [productId], 
-            function(error, result){
+        var query = connection.query('SELECT P.id , P.nombre, P.precio, P.ano, P.oferta, P.disponible, P.ecologica, P.fechaCarga, P.descripcion,'+
+            'T.tipo, P.marca, P.color, M.material'+
+            ' FROM Productos AS P'+ 
+            ' JOIN Tipo AS T ON P.tipo = T.id'+
+            ' JOIN Material AS M ON P.material = M.id'+
+            ' WHERE P.id = ?', [productId], 
+        function(error, result){
                if(error){
                     throw error;
                }else{
@@ -150,12 +150,27 @@ module.exports = (app) => {
 
 
 
+    app.get('/productos/getProductosMasVendidos', (req,res)=>{
+        var query = connection.query('SELECT P.id , P.nombre, P.precio, P.ano, P.oferta, P.disponible, P.ecologica, P.fechaCarga, P.descripcion,'+
+        'P.tipo, P.marca, P.color, P.material, I.link'+
+        ' FROM Productos AS P'+
+        ' JOIN imagenesproductos AS I'+
+        ' ON P.id = I.idProducto'+
+        ' WHERE P.disponible = 1'+
+        ' GROUP BY P.id',[],
+            function(error, result){
+                if(error){
+                    throw error;
+                }else{
+                    console.log(result);
+                    res.json(result);
+            }
+            }
+        );
+    });
 
 
-
-
-
-
+    /*PARA REVISAR
     app.put('/productos/finishPurchase' , (req,res) => {
 
         let purchase = req.body;
@@ -196,7 +211,7 @@ module.exports = (app) => {
         res.send(productsForMaterials);
     });
 
-    /*app.post('/productos/create', (req, res) => {
+    app.post('/productos/create', (req, res) => {
 
         let producto = req.body;
 

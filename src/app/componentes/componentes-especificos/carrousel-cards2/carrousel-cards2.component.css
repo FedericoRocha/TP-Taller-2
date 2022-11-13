@@ -1,16 +1,25 @@
-.card {
-  transition: all 0.2s ease;
-  cursor: pointer;
+.vendido{
+  border-color: green;
+
+}
+.card{
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+
+.card:hover{
+    box-shadow: 5px 6px 6px 2px #e9ecef;
+    transform: scale(1.1);
 }
 
-.card:hover {
-  box-shadow: 5px 6px 6px 2px #e9ecef;
-  transform: scale(1.1);
-}
 
 h3 {
   text-align: center;
 
+}
+
+img{
+  max-width: 100%;
 }
 
 .carousel-control-prev-icon,
@@ -34,4 +43,7 @@ h3 {
   content: '<';
   font-size: 55px;
   color: grey;
+}
+a:link, a:visited, a:active {
+  text-decoration:none;
 }

@@ -1,120 +1,42 @@
-<h3>Publicados recientemente</h3>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <h3>Los mas vendidos</h3>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="inam" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="container mt-4 mb-5">
+                                <div class="row">
+                                    <!-- busca una lista de producos cargados en el carrousel-cards.componen usa la iterfaz zapatilla-->
+                                    <!-- producto es el producto,  zapatillas es el array declarado en carrusel-cards -->
+                                    <ng-container *ngFor="let producto of zapatillas | slice:0:4">
+                                         
+                                                                               
+                                             <div class="col-sm-12 col-lg-3">   
+                                                <a [routerLink]="['/productoDescripcion',producto.id]" >
+                                                   
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
-    </script>
+                                                  <!-- si el producto esta en oferta el borde es verde, revisar el css -->
+                                                <div class="card" [ngClass]="{'vendido': producto.disponible}">
+                                                
+                                                <!-- intentar en el alt poner el logo.png asi si no carga la imagen del producto muestra el logo  [alt]="./assets/logo.png" -->
+                                                <img [src]="producto.link"  [alt]="rutaLogo"  class="card-img-top">
+                                                <div class="card-body">
+                                                    <p class="card-text">{{ producto.nombre }}</p>   
+                                                    <h5 class="card-title">{{ producto.precio *(0.01*(100-producto.oferta))| currency:'ARS '}}</h5>
+                                                    <h6 class="card-text"> Antes {{ producto.precio | currency:'ARS '}}</h6>                                                
+                                                  
+                                                    <!-- tendria que buscar el producto.precio y dividirlo por 3 no me salio-->
+                                                    <p class="card-text">3 cuotas de {{producto.precio /3}}</p>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-            <div id="inam" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <div class="container mt-4 mb-5">
-                            <div class="row">
-                                <div class="col-sm-12 col-lg-3">
-                                    <div class="card h-100">
-                                        <img src="./assets/zapatilla12.webp">
-                                        <div class="card-body">
-                                            <h5 class="card-title">$ 34.099</h5>
-                                            <p class="card-text">ZAPATILLAS ADIDAS ORIGINALS ZX 1K BOOST 2.0</p>
-                                            <p class="card-text">3 cuotas de $ 11.366,00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3">
-                                    <div class="card h-100">
-                                        <img src="./assets/zapatilla9.webp" class="card-img-top">
-                                        <div class="card-body">
-                                            <h5 class="card-title">$75.599</h5>
-                                            <p class="card-text">ZAPATILLAS JORDAN AIR 11 LOW</p>
-                                            <p class="card-text">3 cuotas de $ 25.200,00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3">
-                                    <div class="card h-100">
-                                        <img src="./assets/zapatilla10.webp" class="card-img-top">
-                                        <div class="card-body">
-                                            <h5 class="card-title">$35.999</h5>
-                                            <p class="card-text">ZAPATILLAS JORDAN SERIES 04</p>
-                                            <p class="card-text">3 cuotas de $ 12.000,00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3">
-                                    <div class="card h-100">
-                                        <img src="./assets/zapatilla11.webp" class="card-img-top">
-                                        <div class="card-body">
-                                            <h5 class="card-title">$25.799</h5>
-                                            <p class="card-text">ZAPATILLAS JORDAN AIR 1 LOW</p>
-                                            <p class="card-text">3 cuotas de $ 8.600,00</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <div class="container mt-4 mb-5">
-                            <div class="row">
-                                <div class="col-sm-12 col-lg-3">
-                                    <div class="card h-100">
-                                        <img src="./assets/" class="card-img-top">
-                                        <div class="card-body">
-                                            <h5 class="card-title">$</h5>
-                                            <p class="card-text"></p>
-                                            <p class="card-text"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3">
-                                    <div class="card h-100">
-                                        <img src="./assets/" class="card-img-top">
-                                        <div class="card-body">
-                                            <h5 class="card-title">$</h5>
-                                            <p class="card-text"></p>
-                                            <p class="card-text"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3">
-                                    <div class="card h-100">
-                                        <img src="./assets/" class="card-img-top">
-                                        <div class="card-body">
-                                            <h5 class="card-title">$</h5>
-                                            <p class="card-text"></p>
-                                            <p class="card-text"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12 col-lg-3">
-                                    <div class="card h-100">
-                                        <img src="./assets/" class="card-img-top">
-                                        <div class="card-body">
-                                            <h5 class="card-title">$</h5>
-                                            <p class="card-text"></p>
-                                            <p class="card-text"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Controles -->
-                    <!--<button class="carousel-control-prev" type="button" data-bs-target="#inam" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#inam" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </button>-->
-                </div>
+                                                     </div>
+                                                     </div>                                                
+                                                 </a> 
+                                            </div>   
+                                        
+                                      </ng-container>
             </div>
 
         </div>
 
     </div>
-
- 

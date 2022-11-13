@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Zapatilla } from 'src/app/interfaces/zapatilla';
+import { RestApiService } from 'src/app/services/restApiService';
 
 @Component({
   selector: 'app-carrousel-cards2',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarrouselCards2Component implements OnInit {
 
-  constructor() { }
+  rutaLogo: string="./assets/logo.png";
+  zapatillas: Zapatilla[];
+
+  constructor( private restApiService:RestApiService) { }
 
   ngOnInit(): void {
+    this.cargarZapatillaMasVendida();
   }
 
+
+  cargarZapatillaMasVendida(){
+    this.restApiService.ZapatillaMasVendida().pipe().subscribe(data =>
+      this.zapatillas =data);
+    //console.log(this.zapatillas);
+  }; 
 }

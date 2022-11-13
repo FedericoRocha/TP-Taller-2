@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Talles } from 'src/app/interfaces/talles';
-import  {Imagenes}  from 'src/app/interfaces/imagenes';
+import  {Imagenes}  from 'src/app/interfaces/Imagenes';
 import { RestApiService } from 'src/app/services/restApiService';
 
 
@@ -86,23 +86,21 @@ zapatillas:Zapatilla [] = [];
   ngOnInit(): void {    
     let idproducto=this.route.snapshot.paramMap.get('id');  
     this.cargarZapatillaporID(idproducto); 
-   // this.CargarImagenesporId(idproducto); 
+    this.cargarImagenesporId(idproducto); 
     this.cargarTallesporId(idproducto); 
 
     }
     cargarZapatillaporID(idproducto){
-      this.restApiService.ZapatillaporId(idproducto).pipe().subscribe(data => this.zapatillas=data);
-     
-        console.log(this.zapatillas);
+      this.restApiService.ZapatillaPorId(idproducto).pipe().subscribe(data => this.zapatillas=data);
     } 
-   /* CargarImagenesporId(idproducto){
-      this.restApiService.ImagenesporId(idproducto).pipe().subscribe(data =>
-        this.imagenes =data);
 
-    }; 
-    */cargarTallesporId(idproducto){
-      this.restApiService.TallesporId(idproducto).pipe().subscribe(data => this.talles =data);
-         }
+    cargarImagenesporId(idproducto){
+      this.restApiService.ImagenesPorId(idproducto).pipe().subscribe(data => this.imagenes =data);
+    }
+
+    cargarTallesporId(idproducto){
+      this.restApiService.TallesPorId(idproducto).pipe().subscribe(data => this.talles =data);
+    }
 
   }
 

@@ -1,4 +1,4 @@
 export interface Imagenes {
-    numero:number,
-    stock:number,
+    idProducto:number,
+    link:string
 }

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Zapatilla } from '../interfaces/zapatilla';
 import { ListBucketAnalyticsConfigurationsCommand } from '@aws-sdk/client-s3';
 import { Talles } from '../interfaces/talles';
-import { Imagenes } from '../interfaces/imagenes';
+import { Imagenes } from '../interfaces/Imagenes';
 
 
 //Decorador que marca una clase como disponible para ser proporcionada e inyectada como dependencia//
@@ -47,7 +47,7 @@ export class RestApiService {
         return this.http.post<any>(this.apiURL + '/productos/createProducto', producto, this.httpOptions);
     }
 
-    ZapatillaporId(idproducto:number): Observable<Zapatilla[]>{
+    ZapatillaPorId(idproducto:number): Observable<Zapatilla[]>{
        return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getZapatillaporId/'+idproducto,this.httpOptions);
     }
 
@@ -56,13 +56,18 @@ export class RestApiService {
         return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getOnSale', this.httpOptions);
     }
 
+    ZapatillaMasVendida():Observable<Zapatilla[]>{
+        return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getProductosMasVendidos', this.httpOptions)
+    }
 
 
-    /*ImagenesporId(idproducto:number): Observable<Imagenes[]>{
-       // return this.http.get<Imagenes[]>(this.apiURL + '/productos/getImagenesporId',idproducto, this.httpOptions);
-    }*/
-    TallesporId(idproducto:number): Observable<Talles[]>{
-       return this.http.get<Talles[]>(this.apiURL + '/productos/getTallesporId/'+idproducto,this.httpOptions);
+
+    ImagenesPorId(idproducto:number): Observable<Imagenes[]>{
+       return this.http.get<Imagenes[]>(this.apiURL + '/productos/getImagenesPorId/'+idproducto , this.httpOptions);
+    }
+
+    TallesPorId(idproducto:number): Observable<Talles[]>{
+       return this.http.get<Talles[]>(this.apiURL + '/productos/getTallesporId/'+idproducto , this.httpOptions);
     }
     
 }
