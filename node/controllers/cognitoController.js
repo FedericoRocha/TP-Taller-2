@@ -9,8 +9,8 @@ const regText = /^[a-zA-Z\s]+$/;
 const regAdress = /^[A-Za-z0-9\s]+$/g;
 const regPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).*$/;
 const poolData = {
-    UserPoolId : "us-east-1_R5tUVsSEW", // Your user pool id here   
-    ClientId : "6gg9qiuq9m7u1dtjr477cdsagp" // Your client id here
+  UserPoolId : "us-east-1_GFKM2DjVP", // Your user pool id here   
+  ClientId : "39gonf6saktk3t43ebp08ilhj5" // Your client id here
 }
 
 

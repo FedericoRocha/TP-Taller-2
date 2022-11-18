@@ -1,7 +1,7 @@
 import { Component, DoCheck , OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-//import { CarritoService } from 'src/app/services/carrito.service';
-//import { CookieService } from 'ngx-cookie-service';
+import { CartService } from 'src/app/services/cart.service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -17,8 +17,8 @@ export class NavbarComponent implements OnInit{
   public productos = [];
   isLogged!: Boolean
 
-  constructor(protected router: Router) { 
-    
+  constructor(private cookieService: CookieService, protected router: Router,public CartService:CartService) { 
+    // aca declarar el numero del carrito
   }
     
   ngOnInit(): void {
@@ -33,4 +33,14 @@ export class NavbarComponent implements OnInit{
     let zapatilla = (<HTMLInputElement>document.getElementById("txtZapatilla")).value;
     this.router.navigate(['/buscar-zapatilla', { zapatilla }]);
   }
+
+  ngDoCheck(): void {
+    this.isLogged = this.cookieService.check("token_access")
+  }
+
+  LogOut(){
+    this.cookieService.delete("token_access")
+    this.router.navigate(["/"])
+  }
+
 }
