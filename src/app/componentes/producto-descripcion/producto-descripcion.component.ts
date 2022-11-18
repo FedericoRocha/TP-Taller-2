@@ -23,32 +23,13 @@ export class ProductoDescripcionComponent implements OnInit {
   rutaLogo: string="./assets/logo.png";
 
 
-  // aca tengo un problema, zapattila carrito tiene que ser una convinacion de zapatila descripcion y un valor del talle, nose como mandarlo  
 
-  zapatillaDescripcion:ZapatillaDescripcion ={
-    id:1,
-    nombre:"ADIDAS ORIGINALS NITEBALL 2.0",
-    precio:30000,
-    color:"blanca",
-    ano:22,
-    marca:"Adidas",
-    linkcompra:"productoDescripcion",
-    imagen1:"./assets/zapatilla1.webp", 
-    imagen2:"./assets/zapatilla1.webp", 
-    imagen3:"./assets/zapatilla1.webp", 
-    imagen4:"./assets/zapatilla1.webp", 
-    disciplina:"TREKKING",
-    material:"SINTETICO",
-    descripcionProducto:"• Construida sobre una base de alto rendimiento para brindar máxima sujeción y comodidad. Con una suela exterior duradera que proporciona un agarre prolongado en superficies mojadas Un antepié más ancho proporciona el ajuste cómodo que necesita para recorridos más largos.",
-  }
 zapatillas:Zapatilla [] = [];
-
   
   talles:Talle[]=[] ;
   imagenes:Imagenes[]=[];
 
   talle:number;
-
 
   constructor(
     private route: ActivatedRoute, 
@@ -58,7 +39,7 @@ zapatillas:Zapatilla [] = [];
       console.log(this.route.snapshot.paramMap.get('id'))
   }
 
-  agregarCarrito(zapatillaDescripcion: ZapatillaDescripcion) {
+  agregarCarrito(zapatillas: Zapatilla) {
 
     let talles2 = {} as Talle;
     for(var i=0; i<this.talles.length;i++){
@@ -67,20 +48,17 @@ zapatillas:Zapatilla [] = [];
       }
     }
     let zapatillaCarrito = {} as ZapatillaCarrito;   
-    zapatillaCarrito.id=zapatillaDescripcion.id;
-    zapatillaCarrito.nombre=zapatillaDescripcion.nombre;
-    zapatillaCarrito.imagen1=zapatillaDescripcion.imagen1;
-    zapatillaCarrito.precio=zapatillaDescripcion.precio;
-    zapatillaCarrito.color=zapatillaDescripcion.color;
-    zapatillaCarrito.marca=zapatillaDescripcion.marca;  
-
+    zapatillaCarrito.id=zapatillas.id;
+    zapatillaCarrito.nombre=zapatillas.nombre;
+   // zapatillaCarrito.imagen1=zapatillas.imagen1;
+    zapatillaCarrito.precio=zapatillas.precio;
     zapatillaCarrito.talle=talles2.talle;
     zapatillaCarrito.stock=talles2.stock;
     zapatillaCarrito.cantidad=1;
-// formo una key compuesta para poder usarla en el local storage
-    zapatillaCarrito.key=zapatillaDescripcion.id+"-"+talles2.talle;
+  // formo una key compuesta para poder usarla en el local storage
+    zapatillaCarrito.key=zapatillas.id+"-"+talles2.talle;
     this.cartService.addToCart(zapatillaCarrito);
-    window.alert('Your product has been added to the cart!');
+    window.alert('El producto se agrego');
   }
 
   ngOnInit(): void {    
@@ -101,7 +79,6 @@ zapatillas:Zapatilla [] = [];
     cargarTallesporId(idproducto){
       this.restApiService.TallesPorId(idproducto).pipe().subscribe(data => this.talles =data);
     }
-
   }
 
 

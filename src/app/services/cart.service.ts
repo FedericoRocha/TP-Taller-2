@@ -8,9 +8,9 @@ export class CartService {
 
   items: ZapatillaCarrito[]=[];
   carritoNumero:0;
+  cantidadCarritoNav=0;
 
   addToCart(zapatillaCarrito: ZapatillaCarrito) {
-
 
     // si no existe en el local storage se agrega
      const keys = Object.keys(localStorage);
@@ -31,7 +31,6 @@ export class CartService {
     }
   }
     
-
   getItems() {
     // recorrer elas keys guardadas, parse json
     // agregar los items. para retornar la lista creada 
@@ -41,7 +40,6 @@ export class CartService {
     keys.forEach(key => {	
       if(true==this.validarKey(key)){
      this.items.push(JSON.parse(localStorage[key]));}
-
     
       });
       return this.items;
@@ -68,6 +66,12 @@ export class CartService {
    validarKey(key: string) {    
 		return this.idRegex.test(key);
 	}
-  
+/*  esto no anda
+  calcularCantidadCarritoNav():number{
+    this.items.forEach(zapatillaCarrito =>{
+      this.cantidadCarritoNav+=zapatillaCarrito.cantidad});
+    return this.cantidadCarritoNav
+  }
+  */
   constructor() { }
 }

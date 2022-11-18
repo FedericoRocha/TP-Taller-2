@@ -11,24 +11,23 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit{
- 
-  //carritoNumero=0;  
-
+  CantidadCarritoNav:Number = 0;
   public productos = [];
   isLogged!: Boolean
 
-  constructor(private cookieService: CookieService, protected router: Router,public CartService:CartService) { 
-    // aca declarar el numero del carrito
+  constructor(private cookieService: CookieService, protected router: Router,public cartService:CartService) { 
+    // esto esta mal, nose como llamar a la funcion    
+    this.CantidadCarritoNav= localStorage.length
   }
     
   ngOnInit(): void {
+  
   }
 
   onClick(){
     console.log('ejecutando redirect');
     this.router.navigate(['/buscar-zapatilla'])
   }
-
   buscadorZapatillas() {
     let zapatilla = (<HTMLInputElement>document.getElementById("txtZapatilla")).value;
     this.router.navigate(['/buscar-zapatilla', { zapatilla }]);

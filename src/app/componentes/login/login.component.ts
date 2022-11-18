@@ -58,7 +58,7 @@ onClick() {
           this.authToken = respuesta;
           this.cookieService.set('token_access', this.authToken, 4, '/');
           
-          this.router.navigate(['/home-admin']);
+          this.router.navigate(['/tienda']);
           window.alert("Ha iniciado sesion correctamente");
 
           this.error = false;

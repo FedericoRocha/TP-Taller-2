@@ -242,7 +242,9 @@ module.exports = (app) => {
         ' JOIN Color AS C ON P.color = C.id'+
         ' JOIN Material AS MA ON P.material = MA.id'+
         ' JOIN imagenesproductos AS I'+
-        ' ON P.id = I.idProducto', [],
+        ' ON P.id = I.idProducto '+
+        ' GROUP BY  P.id', [],
+
         function(error, result){
             if(error){
                  throw error;

@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-
+{{usuario}}
 
 <div *ngIf="items.length >0 ; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock>
@@ -67,7 +67,9 @@
         <tr>
           <th scope="row"><button type="button" class="btn btn-danger btn-sm" (click)="clearCart()">Borrar
               Carrito</button></th>
-          <td><button type="button" class="btn btn-primary btn-sm">Terminar Compra</button></td>
+          <td><button *ngIf="!isLogged" [routerLink]="['/login']" type="button" class="btn btn-primary btn-sm">Ingresar Para Finalziar</button>
+            <button *ngIf="!isLogged" [routerLink]="['/crearcuenta']" type="button" class="btn btn-primary btn-sm">Registrarse Finalziar</button>
+            <button *ngIf="isLogged" type="button" class="btn btn-success" (click)="FinalizarCompra()"  >Terminar Compra</button></td>
         </tr>
       </tbody>
      

@@ -4,7 +4,7 @@ export interface ZapatillaCarrito{
     key:string,
     id:number,
     nombre:string,
-    imagen1:string, 
+   // imagen1:string, 
     precio:number,
     color:string,
     marca:string,
