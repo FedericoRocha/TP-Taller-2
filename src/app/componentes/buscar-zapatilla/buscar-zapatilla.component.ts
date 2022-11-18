@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { Zapatilla } from 'src/app/interfaces/zapatilla';
 import { ZapatillaCarrito } from 'src/app/interfaces/zapatillaCarrito';
 import { CartService } from 'src/app/services/cart.service';
@@ -28,9 +29,10 @@ export class BuscarZapatillaComponent implements OnInit {
   buscarProductos(valorBusqueda) {
     //con el suscribe invocamos al Observable para que comparta informacion cuando se pida una solicitud
     //se le carga el resultado del json a productos
-    this.restApiService.buscarZapatillas(valorBusqueda).subscribe(data => this.productos = data);
+    this.restApiService.BuscardorZapatillasFiltro(valorBusqueda).pipe().subscribe(data => 
+      this.productos = data);
+      console.log(this.productos);
     //muestra los productos encontrados
-    console.log(this.productos);
   }
   
   addToCart(producto: ZapatillaCarrito) {

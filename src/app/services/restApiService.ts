@@ -52,6 +52,10 @@ export class RestApiService {
         return this.http.post<any>(this.apiURL + '/productos/createProducto', producto, this.httpOptions);
     }
 
+    BuscardorZapatillasFiltro(valorBusqueda: any):Observable<Zapatilla[]>{
+        return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getProductosForBuscador/'+valorBusqueda, this.httpOptions);
+    }
+
     ZapatillaPorId(idproducto:number): Observable<Zapatilla[]>{
        return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getZapatillaporId/'+idproducto,this.httpOptions);
     }

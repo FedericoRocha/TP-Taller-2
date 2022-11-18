@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit{
     this.router.navigate(['/buscar-zapatilla'])
   }
 
-  buscarZapatillas() {
+  buscadorZapatillas() {
     let zapatilla = (<HTMLInputElement>document.getElementById("txtZapatilla")).value;
     this.router.navigate(['/buscar-zapatilla', { zapatilla }]);
   }
