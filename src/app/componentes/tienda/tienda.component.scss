@@ -1,0 +1,82 @@
+.zapatilla{
+    border-color: green;
+  
+  }
+  .card{
+      transition: all 0.2s ease;
+      cursor: pointer;
+      margin-bottom: 6%;
+    }
+  
+  .card:hover{
+      box-shadow: 5px 6px 6px 2px #e9ecef;
+      transform: scale(1.01);
+  }
+  
+  
+  h3 {
+    text-align: center;
+  
+  }
+  
+  img{
+    max-width: 100%;
+  }
+  
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    height: 100px;
+    width: 100px;
+    outline: black;
+    background-size: 100%, 100%;
+    border-radius: 50%;
+    background-image: none;
+  }
+  
+  .carousel-control-next-icon:after
+  {
+    content: '>';
+    font-size: 55px;
+    color: grey;
+  }
+  
+  .carousel-control-prev-icon:after {
+    content: '<';
+    font-size: 55px;
+    color: grey;
+  }
+  a:link, a:visited, a:active {
+    text-decoration:none;
+  }
+
+  .table-filter{
+    margin-left: 10%;
+    margin-top: 25%;
+  }
+
+ h4{
+    margin-bottom: 5%;
+ }
+
+ a:link {
+    text-decoration:none;
+    cursor: wait;
+}
+
+ul {
+    list-style: none;
+}
+
+li{
+    cursor:pointer;
+    margin-left: 10%;
+}
+
+.table{
+    margin-top: 60%;
+}
+
+.titulo-tienda{
+  margin-top: 5%;
+  margin-bottom: 5%;
+}

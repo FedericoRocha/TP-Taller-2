@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Talles } from 'src/app/interfaces/talles';
+import { Talle } from 'src/app/interfaces/Talle';
 import  {Imagenes}  from 'src/app/interfaces/Imagenes';
 import { RestApiService } from 'src/app/services/restApiService';
 
@@ -44,7 +44,7 @@ export class ProductoDescripcionComponent implements OnInit {
 zapatillas:Zapatilla [] = [];
 
   
-  talles:Talles[]=[] ;
+  talles:Talle[]=[] ;
   imagenes:Imagenes[]=[];
 
   talle:number;
@@ -60,7 +60,7 @@ zapatillas:Zapatilla [] = [];
 
   agregarCarrito(zapatillaDescripcion: ZapatillaDescripcion) {
 
-    let talles2 = {} as Talles;
+    let talles2 = {} as Talle;
     for(var i=0; i<this.talles.length;i++){
       if(this.talles[i].talle==this.talle){
         talles2=this.talles[i];

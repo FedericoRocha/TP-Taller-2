@@ -9,9 +9,12 @@ const regText = /^[a-zA-Z\s]+$/;
 const regAdress = /^[A-Za-z0-9\s]+$/g;
 const regPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).*$/;
 const poolData = {
-    UserPoolId : "us-east-1_gqaDbRM6O", // Your user pool id here   
-    ClientId : "5qa1filk2smc6ssvr24d4di4ci" // Your client id here
+    UserPoolId : "us-east-1_R5tUVsSEW", // Your user pool id here   
+    ClientId : "6gg9qiuq9m7u1dtjr477cdsagp" // Your client id here
 }
+
+
+
 var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
 
 var controller = {

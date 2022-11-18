@@ -3,8 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Zapatilla } from '../interfaces/zapatilla';
 import { ListBucketAnalyticsConfigurationsCommand } from '@aws-sdk/client-s3';
-import { Talles } from '../interfaces/talles';
+import { Talle } from '../interfaces/Talle';
 import { Imagenes } from '../interfaces/Imagenes';
+import { Marca } from '../interfaces/Marca';
+import { Material } from '../interfaces/Material';
+import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
+import { Tipo } from '../interfaces/Tipo';
+import { Color } from '../interfaces/Color';
 
 
 //Decorador que marca una clase como disponible para ser proporcionada e inyectada como dependencia//
@@ -66,8 +71,52 @@ export class RestApiService {
        return this.http.get<Imagenes[]>(this.apiURL + '/productos/getImagenesPorId/'+idproducto , this.httpOptions);
     }
 
-    TallesPorId(idproducto:number): Observable<Talles[]>{
-       return this.http.get<Talles[]>(this.apiURL + '/productos/getTallesporId/'+idproducto , this.httpOptions);
+    TallesPorId(idproducto:number): Observable<Talle[]>{
+       return this.http.get<Talle[]>(this.apiURL + '/productos/getTallesporId/'+idproducto , this.httpOptions);
     }
+
+    TodosLosProductos(): Observable<Zapatilla[]>{
+        return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getAllTheProducts/', this.httpOptions);
+     }
+
+     GetZapatillaForMarca(marca: number): Observable<Zapatilla[]>{
+        return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getProductsForMarca/'+marca, this.httpOptions);
+     }
     
+     GetZapatillaForMatirial(material: number): Observable<Zapatilla[]>{
+        return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getProductsForMatirial/'+material, this.httpOptions);
+     }
+
+     GetZapatillaForType(tipo: number): Observable<Zapatilla[]>{
+        return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getProductsForType/'+tipo, this.httpOptions);
+     }
+
+     GetZapatillaForTalle(talle: number): Observable<Zapatilla[]>{
+        return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getProductsForTalle/'+talle, this.httpOptions);
+     }
+
+     GetZapatillaForColor(color: number): Observable<Zapatilla[]>{
+        return this.http.get<Zapatilla[]>(this.apiURL + '/productos/getProductsForColor/'+color, this.httpOptions);
+     }
+
+     GetAllMarcas():Observable<Marca[]>{
+        return this.http.get<Marca[]>(this.apiURL + '/productos/getAllMarcas/',this.httpOptions);
+     }
+
+     GetAllMatirials():Observable<Material[]>{
+        return this.http.get<Material[]>(this.apiURL + '/productos/getAllMatirials/',this.httpOptions);
+     }
+
+     GetAllTalles():Observable<Talle[]>{
+        return this.http.get<Talle[]>(this.apiURL + '/productos/getAllTalles/', this.httpOptions);
+     }
+
+     GetAllTipos():Observable<Tipo[]>{
+        return this.http.get<Tipo[]>(this.apiURL + '/productos/getAllTipos/', this.httpOptions);
+     }
+
+     GetAllColores():Observable<Color[]>{
+        return this.http.get<Color[]>(this.apiURL + '/productos/getAllColors/', this.httpOptions);
+     }
+
 }

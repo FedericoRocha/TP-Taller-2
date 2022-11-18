@@ -26,6 +26,7 @@ import { BuscarZapatillaComponent } from './componentes/buscar-zapatilla/buscar-
 import { EditarProductoComponent } from './componentes/home-admin/editar-producto/editar-producto.component';
 import { AgregarProductoComponent } from './componentes/home-admin/agregar-producto/agregar-producto.component';
 import { HomeAdminComponent } from './componentes/home-admin/home-admin.component';
+import { TiendaComponent } from './componentes/tienda/tienda.component';
 
 
 const appRoutes: Routes = [
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
   { path: 'editar-producto/:id', component: EditarProductoComponent  , canActivate: [VigilanteGuard]},
   { path: 'login', component: LoginComponent },
   { path: 'crearcuenta', component: CrearcuentaComponent },
+  { path: 'tienda', component: TiendaComponent },
   // producto tiene que ser un modelo no una pagina, no tengo idea de como redireccionarla para que se cargen los datos dle producto seleccionado
   { path: 'productoDescripcion/:id', component: ProductoDescripcionComponent }, 
   { path: 'carrito', component: CarritoComponent }, 
@@ -64,7 +66,8 @@ const appRoutes: Routes = [
     BuscarZapatillaComponent,
     HomeAdminComponent,
     AgregarProductoComponent,
-    EditarProductoComponent
+    EditarProductoComponent,
+    TiendaComponent
 
   ],
   imports: [

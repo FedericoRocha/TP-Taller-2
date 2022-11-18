@@ -47,35 +47,212 @@ module.exports = (app) => {
     });
 
 
+    /*NEW GETS*/ 
 
-    /* PARA REVISAR
-    app.get('/productos/getMarcas', (req, res) => {
-        let marca = productosServices.getMarcas();
 
-        res.send(marca)
+    app.get('/productos/getProductsForMarca/:marca', (req, res) => {
+        let marcas = req.params.marca;
+        var query = connection.query(' SELECT P.id, P.nombre, P.precio, P.ano,P.oferta,P.disponible,P.ecologica,P.fechaCarga,P.descripcion,'+
+        'T.tipo, M.marca, C.color, MA.material, I.link'+
+        ' FROM Productos AS P'+
+        ' JOIN Tipo AS T ON P.tipo = T.id'+
+        ' JOIN Marca AS M ON P.marca = M.id'+
+        ' JOIN Color AS C ON P.color = C.id'+
+        ' JOIN Material AS MA ON P.material = MA.id'+
+        ' JOIN Imagenesproductos AS I'+
+        ' ON P.id = I.idProducto'+
+        ' WHERE P.Marca = ?'+
+        ' GROUP BY P.id', [marcas],
+        function(error, result){
+            if(error){
+                 throw error;
+            }else{
+                 console.log(result);
+                 res.json(result);
+            }
+        }
+     );         
     });
 
-
-    app.get('/productos/getTipos', (req, res) =>{
-        let tipos = productosServices.getTipos();
-
-        res.send(tipos);
+    app.get('/productos/getProductsForMatirial/:material', (req, res) =>{
+        let materiales = req.params.material;
+        var query = connection.query('SELECT P.id,P.nombre, P.precio, P.ano,P.oferta,P.disponible,P.ecologica,P.fechaCarga,P.descripcion,'+ 
+        ' T.tipo, M.marca, C.color, MA.material, I.link'+
+        ' FROM Productos AS P '+
+        ' JOIN Tipo AS T ON P.tipo = T.id'+
+        ' JOIN Marca AS M ON P.marca = M.id'+ 
+        ' JOIN Color AS C ON P.color = C.id'+
+        ' JOIN Material AS MA ON P.material = MA.id'+
+        ' JOIN Imagenesproductos AS I ON P.id = I.idProducto'+
+        ' WHERE P.Material = ?'+
+        ' GROUP BY P.id', [materiales],
+        function(error, result){
+            if(error){
+                 throw error;
+            }else{
+                 console.log(result);
+                 res.json(result);
+            }
+        }
+     );   
     });
 
-
-    app.get('/productos/getMaterials', (req, res) =>{
-        let matirials = productosServices.getMaterials();
-
-        res.send(matirials);
+    app.get('/productos/getProductsForColor/:color', (req,res) =>{
+        let colores = req.params.color;
+        var query = connection.query('SELECT P.id, P.nombre, P.precio, P.ano,P.oferta,P.disponible,P.ecologica,P.fechaCarga,P.descripcion,'+ 
+        'T.tipo, M.marca, C.color, MA.material, I.link'+
+        ' FROM Productos AS P'+
+        ' JOIN Tipo AS T ON P.tipo = T.id'+
+        ' JOIN Marca AS M ON P.marca = M.id'+
+        ' JOIN Color AS C ON P.color = C.id'+
+        ' JOIN Material AS MA ON P.material = MA.id'+
+        ' JOIN Imagenesproductos AS I ON P.id = I.idProducto'+
+        ' WHERE P.Color = ?'+
+        ' GROUP BY P.id', [colores],
+        function(error, result){
+            if(error){
+                 throw error;
+            }else{
+                 console.log(result);
+                 res.json(result);
+            }
+        }
+     );  
     });
 
+    app.get('/productos/getProductsForType/:tipo', (req, res) =>{
+        let tipos = req.params.tipo;
+        var query = connection.query('SELECT P.id, P.nombre, P.precio, P.ano,P.oferta,P.disponible,P.ecologica,P.fechaCarga,P.descripcion,'+
+        ' T.tipo, M.marca, C.color, MA.material, I.link'+
+        ' FROM Productos AS P'+
+        ' JOIN Tipo AS T ON P.tipo = T.id'+
+        ' JOIN Marca AS M ON P.marca = M.id'+ 
+        ' JOIN Color AS C ON P.color = C.id'+
+        ' JOIN Material AS MA ON P.material = MA.id'+
+        ' JOIN Imagenesproductos AS I ON P.id = I.idProducto'+
+        ' WHERE P.Tipo = ?'+
+        ' GROUP BY P.id', [tipos],
+        function(error, result){
+            if(error){
+                 throw error;
+            }else{
+                 console.log(result);
+                 res.json(result);
+            }
+        }
+     );   
+    });
 
-    app.get('/productos/getColors', (req, res) => {
-        let colors = productosServices.getColors();
+    app.get('/productos/getProductsForTalle/:talle', (req, res) => {
+        let talles = req.params.talle;
+        var query = connection.query('SELECT P.id,P.nombre, P.precio, P.ano,P.oferta,P.disponible,P.ecologica,P.fechaCarga,P.descripcion,'+
+        'T.tipo, M.marca, C.color, MA.material, I.link'+
+        ' FROM Productos AS P'+
+        ' JOIN Tipo AS T ON P.tipo = T.id'+
+        ' JOIN Marca AS M ON P.marca = M.id'+
+        ' JOIN Color AS C ON P.color = C.id'+
+        ' JOIN Material AS MA ON P.material = MA.id'+
+        ' JOIN Imagenesproductos AS I ON P.id = I.idProducto'+
+        ' JOIN Talle AS TA ON P.id = TA.idProducto'+
+        ' WHERE TA.talle = ?'+
+        ' GROUP BY P.id', [talles],
+        function(error, result){
+            if(error){
+                 throw error;
+            }else{
+                 console.log(result);
+                 res.json(result);
+            }
+        }
+     );   
+    });
 
-        res.send(colors);
-    });*/
+    app.get('/productos/getAllTalles/', (req, res) => {
+        var query = connection.query('SELECT T.idProducto, T.talle, T.stock FROM Talle AS T'+
+        ' GROUP BY T.talle', [],
+        function(error, result){
+            if(error){
+                 throw error;
+            }else{
+                 console.log(result);
+                 res.json(result);
+            }
+        }
+     );   
+    });
 
+    app.get('/productos/getAllMarcas/', (req, res) => {
+        var query = connection.query('SELECT M.id, M.marca FROM Marca AS M', [],
+        function(error, result){
+            if(error){
+                 throw error;
+            }else{
+                 console.log(result);
+                 res.json(result);
+            }
+        }
+     );   
+    });
+
+    app.get('/productos/getAllTipos/', (req, res) => {
+        var query = connection.query('SELECT T.id, T.tipo FROM Tipo AS T', [],
+        function(error, result){
+            if(error){
+                 throw error;
+            }else{
+                 console.log(result);
+                 res.json(result);
+            }
+        }
+     );   
+    });
+
+    app.get('/productos/getAllColors/', (req, res) => {
+        var query = connection.query('SELECT C.id, C.color FROM Color AS C', [],
+        function(error, result){
+            if(error){
+                 throw error;
+            }else{
+                 console.log(result);
+                 res.json(result);
+            }
+        }
+     );   
+    });
+
+    app.get('/productos/getAllMatirials/', (req, res) => {
+        var query = connection.query('SELECT M.id, M.material FROM Material AS M', [],
+        function(error, result){
+            if(error){
+                 throw error;
+            }else{
+                 console.log(result);
+                 res.json(result);
+            }
+        }
+     );   
+    });
+
+    app.get('/productos/getAllTheProducts/',(req, res) =>{
+        var query = connection.query('SELECT P.id ,P.nombre, P.precio, P.ano,P.oferta,P.disponible,P.ecologica ,P.fechaCarga,P.descripcion,'+ 
+        'T.tipo, M.marca, C.color, MA.material, I.link'+
+        ' FROM Productos AS P'+
+        ' JOIN Tipo AS T ON P.tipo = T.id'+
+        ' JOIN Marca AS M ON P.marca = M.id'+
+        ' JOIN Color AS C ON P.color = C.id'+
+        ' JOIN Material AS MA ON P.material = MA.id'+
+        ' JOIN imagenesproductos AS I'+
+        ' ON P.id = I.idProducto', [],
+        function(error, result){
+            if(error){
+                 throw error;
+            }else{
+                 console.log(result);
+                 res.json(result);
+            }
+        }
+     );    
+    });
 
     app.get('/productos/getImagenesPorId/:idproducto', (req, res) =>{
         let productId=req.params.idproducto;
@@ -136,7 +313,7 @@ module.exports = (app) => {
 
     app.get('/productos/getTallesporId/:idproducto', (req, res) =>{
         let productId=req.params.idproducto;
-        var query = connection.query('select talle, stock from talle where idproducto = ?', [productId], 
+        var query = connection.query('SELECT T.idProducto, T.talle, T.stock from Talle AS T where idproducto = ?', [productId], 
             function(error, result){
                if(error){
                     throw error;

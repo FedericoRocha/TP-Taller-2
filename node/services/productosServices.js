@@ -47,7 +47,7 @@ const deleteProducto = (id) => {
 
     console.log(id);
 }*/
-
+/*
 const getMaterials = () =>{
     return getMaterials();
 }
@@ -413,5 +413,5 @@ getShoesForColor = (idColor) =>{
 }
 
 module.exports = { getAll, getZapatillaporId,getMaterials,getColors ,getMarcas,getTipos,getOnSale,finishPurchase,getImage,getShoesForMarcas,getShoesForTypes,getShoesForMaterials,getShoesForTalles, getShoesForColors}
-
+*/
 //connection.end();
