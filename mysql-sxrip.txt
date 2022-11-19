@@ -204,7 +204,7 @@ CREATE TABLE usuario (
 	email varchar(60),
     direccion  varchar(60));
     
-CREATE TABLE venta ( id int AUTO_INCREMENT primary key  ,usuario varchar(250), fecha dateTime NOT NULL DEFAULT now());
+CREATE TABLE venta ( id int AUTO_INCREMENT primary key  ,usuario varchar(250), fecha dateTime NOT NULL DEFAULT now(),total int);
  
 create table resumen(id int AUTO_INCREMENT primary key, idVenta int , idproducto int, talle int, cantidad int, foreign key (idVenta) references venta(id),foreign key (idproducto) 
 references productos(id));
