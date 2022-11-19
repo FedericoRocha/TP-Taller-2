@@ -379,13 +379,14 @@ module.exports = (app) => {
 
 
     app.get('/productos/getIDUtimaVenta',(req,res)=>{
-        var query = connection.query('SELECT MAX(V.id) FROM Venta AS V',[],
+        var query = connection.query('SELECT MAX(V.id) As ultimaCompra FROM Venta AS V',[],
             function(error, result){
                 if(error){
                     throw error;
                 }else{
                     console.log(result);
                     res.json(result);
+
             }
             }
         );

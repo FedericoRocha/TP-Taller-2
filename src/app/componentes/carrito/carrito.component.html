@@ -1,5 +1,4 @@
 <app-navbar></app-navbar>
-{{usuario}}
 
 <div *ngIf="items.length >0 ; then thenBlock else elseBlock"></div>
 <ng-template #thenBlock>
@@ -65,12 +64,13 @@
           <td><span class="input-group-text">{{total}}</span></td>
         </tr>
         <tr>
-          <th scope="row"><button type="button" class="btn btn-danger btn-sm" (click)="clearCart()">Borrar
-              Carrito</button></th>
-          <td><button *ngIf="!isLogged" [routerLink]="['/login']" type="button" class="btn btn-primary btn-sm">Ingresar Para Finalziar</button>
-            <button *ngIf="!isLogged" [routerLink]="['/crearcuenta']" type="button" class="btn btn-primary btn-sm">Registrarse Finalziar</button>
+          <th scope="row"><button type="button" class="btn btn-danger btn-sm" (click)="clearCart()">Borrar Carrito</button>
+            </th>
+          <td><button *ngIf="!isLogged" [routerLink]="['/login']" type="button" class="btn btn-primary btn-sm">Iniciar Sesion paa Finalizar</button>
+           
             <button *ngIf="isLogged" type="button" class="btn btn-success" (click)="FinalizarCompra()"  >Terminar Compra</button></td>
         </tr>
+        
       </tbody>
      
        </table>
@@ -88,7 +88,22 @@
       <p class="col-md-8 fs-4">REGISTRATE Y RECIBÍ NOVEDADES GRID</p>
       <button class="btn btn-primary btn-lg" type="button" [routerLink]="['crearcuenta']">Registrarme</button>     
        --> 
-      <p class="col-md-8 fs-4"></p>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
       <button class="btn btn-primary btn-lg" type="button" [routerLink]="['']">Ver la Tienda</button>
     </div>
   </div>

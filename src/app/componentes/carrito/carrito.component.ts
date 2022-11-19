@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { RestApiService } from 'src/app/services/restApiService';
 import { Venta } from 'src/app/interfaces/Venta';
 import { Resumen } from 'src/app/interfaces/Resumen';
+import { UltimoNumero } from 'src/app/interfaces/UltimoNumero';
 
 
 @Component({
@@ -17,45 +18,56 @@ export class CarritoComponent implements OnInit {
   isLogged!: Boolean;
   usuario:string;
   items : ZapatillaCarrito[]=[];
-  cantidadCarritoNav=0;
+  cantidadCarritoNav:number;
   total=0;
   envio=800;
   subtotal=0;
-  idUltimaVenta:number;
+  idUltimaVenta:UltimoNumero[]=[];
   Venta : Venta;
   Resumen: Resumen;
-  usuarioVenta:string;
+  usuarioVenta:any;
   
   constructor(private cookieService: CookieService, protected router: Router,public cartService:CartService,private restApiService:RestApiService
-  ) {}
+  ) {
 
-  ngOnInit(): void {
-    this.calcularsubtotal();    
-    this.usuario=this.cookieService.get("token_access");
-    this.items=[];
-    this.items=this.cartService.getItems();
-  
   }
+  ngOnInit(): void {    
+    this.usuario=this.cookieService.get("token_access");
+    this.usuarioVenta=localStorage.getItem("emailUsuario");
+    this.items=this.cartService.getItems();
+    this.calcularsubtotal();
+    this.calcularNumeroCarrito();
+  }
+
+  calcularNumeroCarrito(){
+    this.items.forEach(zapatillaCarrito =>{
+    this.cantidadCarritoNav+=zapatillaCarrito.cantidad
+    }); 
+    localStorage.setItem("cantidadCarritoNav", JSON.stringify(this.cantidadCarritoNav));
+  }
+
+  
     agregarCantidad(item:ZapatillaCarrito):void{
 
     if(item.cantidad==5 || item.cantidad==item.stock){
       alert("cantidad maxima de permitida");
-    }
-    // la idea que tenga un maximo de compra o traer el stock de los items
+    }    
     if(item.cantidad<5 && item.cantidad<item.stock){
       item.cantidad++;
       localStorage.setItem(item.key, JSON.stringify(item));
-      
-    }
-    this.calcularsubtotal();
+      this.calcularsubtotal();
+      this.calcularNumeroCarrito();
+    }    
 
   }
   restarCantidad(item:ZapatillaCarrito):void{
     if(item.cantidad>1){
-      item.cantidad--;
+      item.cantidad=item.cantidad-1;
       localStorage.setItem(item.key, JSON.stringify(item));
+      this.calcularsubtotal();
+      this.calcularNumeroCarrito();
     }   
-    this.calcularsubtotal();
+   
   }
 
   // nose como importar para borrar desde el servicio carrito
@@ -69,10 +81,12 @@ export class CarritoComponent implements OnInit {
   calcularsubtotal(){
     this.items.forEach(zapatillaCarrito =>{
     this.subtotal+=zapatillaCarrito.cantidad*zapatillaCarrito.precio
-    }); 
-    if(this.subtotal>20000){
+        this.calcularNumeroCarrito();
+    });
+    this.calcularNumeroCarrito(); 
+    if(this.subtotal>30000){
       this.envio=0;
-      this.total =this.subtotal+this.envio;
+      this.total =this.subtotal;
      }else {
       this.envio=800;
       this.total =this.subtotal+this.envio;
@@ -83,22 +97,23 @@ export class CarritoComponent implements OnInit {
     this.isLogged = this.cookieService.check("token_access")
   }
 
+
   async FinalizarCompra():Promise<void>{
-    this.usuario=this.cookieService.get("token_access")
-    
-    this.usuarioVenta = "";
-    
-    (await this.restApiService.GuardarVenta(this.usuario)).pipe().subscribe();
+        //this.usuario=this.cookieService.get("token_access");
+        
+    (await this.restApiService.GuardarVenta(this.usuarioVenta)).pipe().subscribe();
 
     (await this.restApiService.GetUltimaVenta()).pipe().subscribe(data =>
       this.idUltimaVenta = data);
+      let valor = JSON.parse(JSON.stringify(this.idUltimaVenta));
+      valor=valor[0].ultimaCompra;
 
     this.items.forEach(async element => {
-      (await this.restApiService.GuardarResumen(1, element.id, element.talle, element.cantidad)).pipe().subscribe();
+      (await this.restApiService.GuardarResumen(valor, element.id, element.talle, element.cantidad)).pipe().subscribe();
     });
-
     alert("Se realizo la compra con exito");
-    this.router.navigate(['/login']);    
+    this.clearCart();
+    this.router.navigate(['/login']); 
   }
 
 }

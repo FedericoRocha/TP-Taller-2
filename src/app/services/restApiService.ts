@@ -12,6 +12,7 @@ import { Tipo } from '../interfaces/Tipo';
 import { Color } from '../interfaces/Color';
 import { Venta } from 'src/app/interfaces/Venta';
 import { Resumen } from 'src/app/interfaces/Resumen';
+import { UltimoNumero } from '../interfaces/UltimoNumero';
 
 
 
@@ -126,8 +127,8 @@ export class RestApiService {
         return this.http.get<Color[]>(this.apiURL + '/productos/getAllColors/', this.httpOptions);
      }
 
-     async GetUltimaVenta():Promise<Observable<number>>{
-      return await this.http.get<number>(this.apiURL + '/productos/getIDUtimaVenta', this.httpOptions)
+     async GetUltimaVenta():Promise<Observable<UltimoNumero[]>>{
+      return await this.http.get<UltimoNumero[]>(this.apiURL + '/productos/getIDUtimaVenta', this.httpOptions)
      }
 
      async GuardarVenta(usuario: string){

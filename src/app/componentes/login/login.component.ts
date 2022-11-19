@@ -13,7 +13,6 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent implements OnInit {
   iniciarSesionForm!: FormGroup;
-  
   email!: any;
   password!: any;
   mensajeLogin!: string;
@@ -57,10 +56,9 @@ onClick() {
         if (respuesta !== null && respuesta !== undefined) {
           this.authToken = respuesta;
           this.cookieService.set('token_access', this.authToken, 4, '/');
-          
+          localStorage.setItem("emailUsuario", JSON.stringify(this.email));
           this.router.navigate(['/tienda']);
           window.alert("Ha iniciado sesion correctamente");
-
           this.error = false;
         }
       },
@@ -84,5 +82,4 @@ onClick() {
 crearcuenta(){
   this.router.navigate(['/crearcuenta'])
 }
-
 }

@@ -2,6 +2,7 @@ import { Component, DoCheck , OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { CookieService } from 'ngx-cookie-service';
+import { Token } from '@angular/compiler';
 
 
 
@@ -11,17 +12,20 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit{
-  CantidadCarritoNav:Number = 0;
+ CantidadCarritoNav:number =0;
   public productos = [];
   isLogged!: Boolean
+  usuario:any;
 
   constructor(private cookieService: CookieService, protected router: Router,public cartService:CartService) { 
     // esto esta mal, nose como llamar a la funcion    
-    this.CantidadCarritoNav= localStorage.length
+    this.CantidadCarritoNav= localStorage.length  
   }
     
   ngOnInit(): void {
-  
+    this.usuario=localStorage.getItem("emailUsuario");
+    
+    //this.CantidadCarritoNav= localStorage.getItem("cantidadCarritoNav");
   }
 
   onClick(){
@@ -38,6 +42,8 @@ export class NavbarComponent implements OnInit{
   }
 
   LogOut(){
+    localStorage.removeItem("emailUsuario")
+    localStorage.clear
     this.cookieService.delete("token_access")
     this.router.navigate(["/"])
   }
