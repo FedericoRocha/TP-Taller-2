@@ -408,13 +408,11 @@ module.exports = (app) => {
     })
 
 
-    app.put('/productos/PutResumenVenta/:Resumen',(req,res) =>{
-        
-        let idVenta = req.params.Resumen.idVenta;
-        let idProducto = req.params.Resumen.idProducto;
-        let talle = req.params.Resumen.talle;
-        let cantidad = req.params.Resumen.cantidad;
-        
+    app.put('/productos/PutResumenVenta/:idVenta/:idProducto/:talle/:cantidad',(req,res) =>{
+        let idVenta = req.params.idVenta;
+        let idProducto = req.params.idProducto;
+        let talle = req.params.talle;
+        let cantidad = req.params.cantidad;
         var query = connection.query('INSERT INTO Resumen (idVenta,idProducto,talle,cantidad)'+
         ' VALUES (?,?,?,?)',[idVenta,idProducto,talle,cantidad],
         function(error, result){

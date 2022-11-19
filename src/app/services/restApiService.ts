@@ -126,15 +126,15 @@ export class RestApiService {
         return this.http.get<Color[]>(this.apiURL + '/productos/getAllColors/', this.httpOptions);
      }
 
-     GetUltimaVenta():Observable<number>{
-      return this.http.get<number>(this.apiURL + '/productos/getIDUtimaVenta', this.httpOptions)
+     async GetUltimaVenta():Promise<Observable<number>>{
+      return await this.http.get<number>(this.apiURL + '/productos/getIDUtimaVenta', this.httpOptions)
      }
 
-     GuardarVenta(usuario: string){
-      return  this.http.put<string>(this.apiURL + '/productos/PutNuevaCompra/'+usuario,this.httpOptions);
+     async GuardarVenta(usuario: string){
+      return await this.http.put<string>(this.apiURL + '/productos/PutNuevaCompra/'+usuario,this.httpOptions);
      }
 
-     GuardarResumen(Resumen: Resumen){
-      return this.http.put<Resumen>(this.apiURL + '/productos/PutResumenVenta/'+Resumen,this.httpOptions)
+     async GuardarResumen(idVenta: number,idProducto:number,talle:number,cantidad:number){
+      return await this.http.put<number>(this.apiURL + '/productos/PutResumenVenta/'+idVenta+'/'+idProducto+'/'+talle+'/'+cantidad,this.httpOptions)
      }
 }
