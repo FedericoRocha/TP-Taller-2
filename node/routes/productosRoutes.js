@@ -352,7 +352,7 @@ module.exports = (app) => {
     app.get('/productos/getProductosForBuscador/:valorBusqueda', (req,res)=>{
         let valor = req.params.valorBusqueda;
         let valorLike = '%'+valor+'%';
-        var query = connection.query('SELECT P.nombre, P.precio, P.ano,P.oferta,P.disponible,P.ecologica,P.fechaCarga,P.descripcion,'+ 
+        var query = connection.query('SELECT P.id, P.nombre, P.precio, P.ano,P.oferta,P.disponible,P.ecologica,P.fechaCarga,P.descripcion,'+ 
         'T.tipo, M.marca, C.color, MA.material, I.link'+
         ' FROM Productos AS P '+
         ' JOIN Tipo AS T ON P.tipo = T.id'+
@@ -364,7 +364,8 @@ module.exports = (app) => {
         ' OR T.tipo LIKE ?'+
         ' OR M.marca LIKE ?'+
         ' OR C.color LIKE ?'+
-        ' OR MA.material LIKE ?',[valorLike,valorLike,valorLike,valorLike,valorLike],
+        ' OR MA.material LIKE ?'+
+        ' GROUP BY P.id',[valorLike,valorLike,valorLike,valorLike,valorLike],
             function(error, result){
                 if(error){
                     throw error;

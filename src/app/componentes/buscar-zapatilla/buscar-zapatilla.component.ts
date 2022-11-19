@@ -27,12 +27,9 @@ export class BuscarZapatillaComponent implements OnInit {
   }
 
   buscarProductos(valorBusqueda) {
-    //con el suscribe invocamos al Observable para que comparta informacion cuando se pida una solicitud
-    //se le carga el resultado del json a productos
     this.restApiService.BuscardorZapatillasFiltro(valorBusqueda).pipe().subscribe(data => 
       this.productos = data);
       console.log(this.productos);
-    //muestra los productos encontrados
   }
   
   addToCart(producto: ZapatillaCarrito) {
