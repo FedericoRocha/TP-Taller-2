@@ -98,6 +98,7 @@ export class CarritoComponent implements OnInit {
     });
 
     alert("Se realizo la compra con exito");
+    this.router.navigate(['/login']);    
   }
 
 }
