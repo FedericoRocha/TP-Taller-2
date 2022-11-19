@@ -100,17 +100,20 @@ export class CarritoComponent implements OnInit {
 
   async FinalizarCompra():Promise<void>{
         //this.usuario=this.cookieService.get("token_access");
-        
-    (await this.restApiService.GuardarVenta(this.usuarioVenta)).pipe().subscribe();
 
-    (await this.restApiService.GetUltimaVenta()).pipe().subscribe(data =>
-      this.idUltimaVenta = data);
+    (await this.restApiService.GuardarVenta(this.usuarioVenta,this.total)).pipe().subscribe();
+
+    (await this.restApiService.GetUltimaVenta()).pipe().subscribe(data =>{
+      this.idUltimaVenta = data
+      
       let valor = JSON.parse(JSON.stringify(this.idUltimaVenta));
       valor=valor[0].ultimaCompra;
 
-    this.items.forEach(async element => {
-      (await this.restApiService.GuardarResumen(valor, element.id, element.talle, element.cantidad)).pipe().subscribe();
+      this.items.forEach(async element => {
+        (await this.restApiService.GuardarResumen(valor, element.id, element.talle, element.cantidad)).pipe().subscribe();
+      });
     });
+     
     alert("Se realizo la compra con exito");
     this.clearCart();
     this.router.navigate(['/login']); 

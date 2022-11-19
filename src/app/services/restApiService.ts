@@ -131,8 +131,8 @@ export class RestApiService {
       return await this.http.get<UltimoNumero[]>(this.apiURL + '/productos/getIDUtimaVenta', this.httpOptions)
      }
 
-     async GuardarVenta(usuario: string){
-      return await this.http.put<string>(this.apiURL + '/productos/PutNuevaCompra/'+usuario,this.httpOptions);
+     async GuardarVenta(usuario: string,total:number){
+      return await this.http.put<any>(this.apiURL + '/productos/PutNuevaCompra/'+usuario+'/'+total,this.httpOptions);
      }
 
      async GuardarResumen(idVenta: number,idProducto:number,talle:number,cantidad:number){

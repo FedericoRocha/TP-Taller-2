@@ -393,10 +393,11 @@ module.exports = (app) => {
     });
 
 
-    app.put('/productos/PutNuevaCompra/:usuario',(req,res) =>{
+    app.put('/productos/PutNuevaCompra/:usuario/:total',(req,res) =>{
         let valor = req.params.usuario;
-        var query = connection.query('INSERT INTO Venta (usuario)'+
-        ' VALUES (?)',[valor],
+        let total = req.params.total;
+        var query = connection.query('INSERT INTO Venta (usuario,total)'+
+        ' VALUES (?,?)',[valor,total],
         function(error, result){
             if(error){
                 throw error;
