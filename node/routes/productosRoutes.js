@@ -377,6 +377,59 @@ module.exports = (app) => {
     });
 
 
+
+    app.get('/productos/getIDUtimaVenta',(req,res)=>{
+        var query = connection.query('SELECT MAX(V.id) FROM Venta AS V',[],
+            function(error, result){
+                if(error){
+                    throw error;
+                }else{
+                    console.log(result);
+                    res.json(result);
+            }
+            }
+        );
+    });
+
+
+    app.put('/productos/PutNuevaCompra/:usuario',(req,res) =>{
+        let valor = req.params.usuario;
+        var query = connection.query('INSERT INTO Venta (usuario)'+
+        ' VALUES (?)',[valor],
+        function(error, result){
+            if(error){
+                throw error;
+            }else{
+                console.log(result);
+                res.json(result);
+        }
+        }
+    );
+    })
+
+
+    app.put('/productos/PutResumenVenta/:Resumen',(req,res) =>{
+        
+        let idVenta = req.params.Resumen.idVenta;
+        let idProducto = req.params.Resumen.idProducto;
+        let talle = req.params.Resumen.talle;
+        let cantidad = req.params.Resumen.cantidad;
+        
+        var query = connection.query('INSERT INTO Resumen (idVenta,idProducto,talle,cantidad)'+
+        ' VALUES (?,?,?,?)',[idVenta,idProducto,talle,cantidad],
+        function(error, result){
+            if(error){
+                throw error;
+            }else{
+                console.log(result);
+                res.json(result);
+        }
+        }
+    );
+    })
+
+
+
     /*PARA REVISAR
     app.put('/productos/finishPurchase' , (req,res) => {
 

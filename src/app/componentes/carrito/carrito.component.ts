@@ -3,6 +3,9 @@ import { ZapatillaCarrito } from 'src/app/interfaces/zapatillaCarrito';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { CookieService } from 'ngx-cookie-service';
+import { RestApiService } from 'src/app/services/restApiService';
+import { Venta } from 'src/app/interfaces/Venta';
+import { Resumen } from 'src/app/interfaces/Resumen';
 
 
 @Component({
@@ -18,8 +21,12 @@ export class CarritoComponent implements OnInit {
   total=0;
   envio=800;
   subtotal=0;
+  idUltimaVenta:number;
+  Venta : Venta;
+  Resumen: Resumen;
+  usuarioVenta:string;
   
-  constructor(private cookieService: CookieService, protected router: Router,public cartService:CartService    
+  constructor(private cookieService: CookieService, protected router: Router,public cartService:CartService,private restApiService:RestApiService
   ) {}
 
   ngOnInit(): void {
@@ -75,8 +82,26 @@ export class CarritoComponent implements OnInit {
   ngDoCheck(): void {
     this.isLogged = this.cookieService.check("token_access")
   }
+
   FinalizarCompra():void{
     this.usuario=this.cookieService.get("token_access")
+   
+    this.restApiService.GetUltimaVenta().pipe().subscribe(data =>
+      this.idUltimaVenta = data);
+      console.log(this.idUltimaVenta);
+    this.usuarioVenta = ""
+
+    this.restApiService.GuardarVenta(this.usuario).pipe().subscribe();
+
+    this.Resumen.idVenta = this.idUltimaVenta+1;
+
+    this.items.forEach(element => {
+      this.Resumen.idProducto = element.id;
+      this.Resumen.talle = element.talle;
+      this.Resumen.cantidad = element.cantidad;
+      this.restApiService.GuardarResumen(this.Resumen).pipe().subscribe();
+    });
+    console.log("La venta se finalizo con exito");
   }
   
 

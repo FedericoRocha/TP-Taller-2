@@ -10,6 +10,9 @@ import { Material } from '../interfaces/Material';
 import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 import { Tipo } from '../interfaces/Tipo';
 import { Color } from '../interfaces/Color';
+import { Venta } from 'src/app/interfaces/Venta';
+import { Resumen } from 'src/app/interfaces/Resumen';
+
 
 
 //Decorador que marca una clase como disponible para ser proporcionada e inyectada como dependencia//
@@ -123,4 +126,15 @@ export class RestApiService {
         return this.http.get<Color[]>(this.apiURL + '/productos/getAllColors/', this.httpOptions);
      }
 
+     GetUltimaVenta():Observable<number>{
+      return this.http.get<number>(this.apiURL + '/productos/getIDUtimaVenta', this.httpOptions)
+     }
+
+     GuardarVenta(usuario: string){
+      return  this.http.put<string>(this.apiURL + '/productos/PutNuevaCompra/'+usuario,this.httpOptions);
+     }
+
+     GuardarResumen(Resumen: Resumen){
+      return this.http.put<Resumen>(this.apiURL + '/productos/PutResumenVenta/'+Resumen,this.httpOptions)
+     }
 }
